@@ -2,13 +2,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Raleway|Ubuntu|Roboto&subset=cyrillic');
 
-/* CSS LIBRARIES */
+/* BOOTSTRAP VARIABLES */
 
 $bgDefault      : #e74c3c;
 $bgHighlight    : #c0392b;
 $colDefault     : #ecf0f1;
 $colHighlight   : #ffbbbc;
 $dropDown       : false;
+
+/* CSS LIBRARIES */
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
 @import "~bootstrap/scss/bootstrap";
@@ -17,6 +19,8 @@ $dropDown       : false;
 
 @import "custom";
 
+/* BOOTSTRAP NAVBAR COLOR SCHEME */
+/* https://work.smarchal.com/twbscolor/ */
 
 .navbar {
   background-color: $bgDefault;
@@ -110,3 +114,5 @@ $dropDown       : false;
   .dropdown-item.active {
     color: $colHighlight;
     background-color: $bgHighlight; }}
+
+

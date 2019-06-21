@@ -3,16 +3,17 @@ body {
 }
 
 .navbar {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .navbar-brand {
+  margin-top: -3px;
   padding-top: 0;
   padding-bottom: 0;
 }
-.navbar .navbar-nav .nav-link {
-  padding-top: 0;
-  padding-bottom: 0;
+.nav-link {
+  padding-top: 3px;
+  padding-bottom: 3px;
   border-radius: 0 !important;
 }
 
