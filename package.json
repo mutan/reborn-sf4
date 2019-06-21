@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@fortawesome/fontawesome-free": "^5.9.0",
         "@symfony/webpack-encore": "^0.27.0",
         "animate.css": "^3.7.2",
         "autoprefixer": "^9.6.0",
@@ -8,7 +9,6 @@
         "core-js": "^3.0.0",
         "datatables.net": "^1.10.19",
         "datatables.net-bs4": "^1.10.19",
-        "font-awesome": "^4.7.0",
         "jquery": "^3.4.1",
         "js-storage": "^1.0.4",
         "loaders.css": "^0.1.2",
