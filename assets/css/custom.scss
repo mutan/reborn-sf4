@@ -22,6 +22,7 @@ html, body {
 }
 .dropdown-menu {
   margin: 0;
+  border-radius: 0;
 }
 
 /* Header */
@@ -40,4 +41,24 @@ html, body {
 
 }
 
+.breadcrumb {
+  border-radius: 0;
+}
+
+.list-group-item {
+  border-radius: 0 !important;
+}
+.list-group-item.active {
+  z-index: 2;
+  color: $colDefault;
+  background-color: $bgDefault;
+  border-color: $bgDefault;
+}
+
+
+
+
+.btn {
+  border-radius: 0;
+}
 
