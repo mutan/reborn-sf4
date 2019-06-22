@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Водная", "image": "water-16x16.png" },
+  { "id": 2, "name": "Воздушная", "image": "air-16x16.png" },
+  { "id": 3, "name": "Земляная", "image": "earth-16x16.png" },
+  { "id": 4, "name": "Огненная", "image": "fire-16x16.png" },
+  { "id": 5, "name": "Светлая", "image": "light-16x16.png" },
+  { "id": 6, "name": "Темная", "image": "dark-16x16.png" }
+]

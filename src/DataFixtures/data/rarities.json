@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Обычная", "image": "common-16x16.png" },
+  { "id": 2, "name": "Необычная", "image": "uncommon-16x16.png" },
+  { "id": 3, "name": "Редкая", "image": "rare-16x16.png" },
+  { "id": 4, "name": "Легендарная", "image": "legendary-16x16.png" },
+  { "id": 5, "name": "Промо", "image": "promo-16x16.png" }
+]

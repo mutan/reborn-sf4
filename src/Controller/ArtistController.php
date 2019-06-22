@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/artist")
+ * @Route("/admin/artist")
  */
 class ArtistController extends AbstractController
 {
@@ -20,7 +20,7 @@ class ArtistController extends AbstractController
      */
     public function index(ArtistRepository $artistRepository): Response
     {
-        return $this->render('artist/index.html.twig', [
+        return $this->render('admin/artist/index.html.twig', [
             'artists' => $artistRepository->findAll(),
         ]);
     }
@@ -42,7 +42,7 @@ class ArtistController extends AbstractController
             return $this->redirectToRoute('artist_index');
         }
 
-        return $this->render('artist/new.html.twig', [
+        return $this->render('admin/artist/new.html.twig', [
             'artist' => $artist,
             'form' => $form->createView(),
         ]);
@@ -53,7 +53,7 @@ class ArtistController extends AbstractController
      */
     public function show(Artist $artist): Response
     {
-        return $this->render('artist/show.html.twig', [
+        return $this->render('admin/artist/show.html.twig', [
             'artist' => $artist,
         ]);
     }
@@ -74,7 +74,7 @@ class ArtistController extends AbstractController
             ]);
         }
 
-        return $this->render('artist/edit.html.twig', [
+        return $this->render('admin/artist/edit.html.twig', [
             'artist' => $artist,
             'form' => $form->createView(),
         ]);
