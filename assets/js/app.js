@@ -102,7 +102,7 @@ let Modal = {
                 type: 'POST',
                 data: formData,
                 beforeSend: ()=> {
-                    $submitButton.prop('disabled', true).html("<i class='fa fa-spinner fa-spin pr-1'></i> Идет сохранение");
+                    $submitButton.prop('disabled', true).html("<i class='fa fa-spinner fa-spin'></i> Идет сохранение");
                 }
             }).then(function (response) {
                 (response.reload) ? location.reload() : Modal.reload($modal, response, options);
@@ -113,6 +113,15 @@ let Modal = {
 
 $('#artist-new').on('click', (e)=> {
     Modal.handleMainModal(e, {
-        url: `/admin/artist/new`
+        url: `/admin/artist/new`,
+        size: 'modal-sm'
+    });
+});
+
+$('.artist-edit').on('click', (e)=> {
+    let artistId = $(e.currentTarget).attr('data-artist-id');
+    Modal.handleMainModal(e, {
+        url: `/admin/artist/${artistId}/edit`,
+        size: 'modal-sm'
     });
 });

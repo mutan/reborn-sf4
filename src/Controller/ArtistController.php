@@ -56,46 +56,10 @@ class ArtistController extends AbstractController
         ], 200);
     }
 
-
-
-
-    /**
-     * @Route("/new1", name="artist_new1", methods={"GET","POST"})
-     */
-    public function new1(Request $request): Response
-    {
-        $artist = new Artist();
-        $form = $this->createForm(ArtistType::class, $artist);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($artist);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('artist_index');
-        }
-
-        return $this->render('admin/artist/new.html.twig', [
-            'artist' => $artist,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="artist_show", methods={"GET"})
-     */
-    public function show(Artist $artist): Response
-    {
-        return $this->render('admin/artist/show.html.twig', [
-            'artist' => $artist,
-        ]);
-    }
-
     /**
      * @Route("/{id}/edit", name="artist_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Artist $artist): Response
+    public function edit(Request $request, Artist $artist): JsonResponse
     {
         $form = $this->createForm(ArtistType::class, $artist);
         $form->handleRequest($request);
@@ -103,16 +67,21 @@ class ArtistController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('artist_index', [
-                'id' => $artist->getId(),
-            ]);
+            $this->addFlash('success', "Художник {$artist->getName()} обновлен.");
+            $reload = true;
         }
 
-        return $this->render('admin/artist/edit.html.twig', [
-            'artist' => $artist,
-            'form' => $form->createView(),
-        ]);
+        return new JsonResponse([
+            'message' => 'Success',
+            'reload' => $reload ?? false,
+            'output' => $this->renderView('admin/artist/_new_modal.html.twig', [
+                'artist' => $artist,
+                'form' => $form->createView(),
+            ])
+        ], 200);
     }
+
+
 
     /**
      * @Route("/{id}", name="artist_delete", methods={"DELETE"})

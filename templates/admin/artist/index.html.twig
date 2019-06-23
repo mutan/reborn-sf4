@@ -16,12 +16,12 @@
 {% endblock %}
 
 {% block body %}
-    <table class="table datatable">
+    <table class="table table-hover datatable">
         <thead>
             <tr>
-                <th>Id</th>
+                <th width="1%">Id</th>
                 <th>Name</th>
-                <th>actions</th>
+                <th width="1%">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +30,9 @@
                 <td>{{ artist.id }}</td>
                 <td>{{ artist.name }}</td>
                 <td>
-                    <a href="{{ path('artist_show', {'id': artist.id}) }}">show</a>
-                    <a href="{{ path('artist_edit', {'id': artist.id}) }}">edit</a>
+                    <a class="btn btn-sm btn-danger artist-edit" href="{{ path('artist_edit', {'id': artist.id}) }}" data-artist-id="{{ artist.id }}">
+                        <i class="fas fa-edit"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -41,6 +42,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('artist_new') }}">Create new</a>
 {% endblock %}
