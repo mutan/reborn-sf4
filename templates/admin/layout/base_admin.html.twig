@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Admin Area | Dashboard</title>
+    <title>Админка | {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('build/favicon.ico') }}">
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -52,32 +53,10 @@
     <header id="header">
         <div class="container">
             <div class="row">
-                <div class="col-md-10 d-flex align-items-center justify-content-start">
-                    <h1><i class="fas fa-cogs"></i> Dashboard <small class="d-none d-lg-inline">Manage Your Site</small></h1>
-                </div>
-                <div class="col-md-2 d-flex align-items-center justify-content-end">
-                    <div class="dropdown create">
-                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Добавить
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-toggle="modal" data-target="#mainModal">
-                            <a class="dropdown-item" href="javascript:void(0);">Карту</a>
-                            <a class="dropdown-item" href="#">Выпуск</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
-                </div>
+                {% block header %}{% endblock %}
             </div>
         </div>
     </header>
-
-    <section id="breadcrumb">
-        <div class="container">
-            <ol class="breadcrumb">
-                <li class="active">Dashboard</li>
-            </ol>
-        </div>
-    </section>
 
     <section id="main">
         <div class="container">

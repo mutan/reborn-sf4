@@ -16,7 +16,7 @@ require('datatables.net-bs4/js/dataTables.bootstrap4');
 /* CUSTOM JS */
 
 $(document).ready( function () {
-    $('#datatable').DataTable({
+    $('.datatable').DataTable({
         "pagingType": "full_numbers",
         "language": {
             "sProcessing":   "Подождите...",
@@ -29,10 +29,10 @@ $(document).ready( function () {
             "sSearch":       "Поиск:",
             "sUrl":          "",
             "oPaginate": {
-                "sFirst": "Первая",
-                "sPrevious": "Предыдущая",
-                "sNext": "Следующая",
-                "sLast": "Последняя"
+                "sFirst": "|<",
+                "sPrevious": "<<",
+                "sNext": ">>",
+                "sLast": ">|"
             },
             "oAria": {
                 "sSortAscending":  ": активировать для сортировки столбца по возрастанию",
