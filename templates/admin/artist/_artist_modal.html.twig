@@ -1,7 +1,7 @@
 {% form_theme form 'common/form/_errors.html.twig' %}
 
 <div class="modal-header">
-    <h4 class="modal-title">Новый художник</h4>
+    <h4 class="modal-title">{{ title }}</h4>
     <button type="button" class="close" data-dismiss="modal">
         <span aria-hidden="true">×</span>
     </button>
@@ -12,7 +12,12 @@
     {{ form_errors(form) }}
 <!--Body-->
 <div class="modal-body">
-    {{ include('admin/artist/_form.html.twig') }}
+    <div class="form-row">
+        <div class="form-group col-12">
+            {{ form_label(form.name, 'Имя') }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+    </div>
 </div>
 <!--Footer-->
 <div class="modal-footer">

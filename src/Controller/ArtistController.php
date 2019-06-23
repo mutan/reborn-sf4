@@ -50,8 +50,9 @@ class ArtistController extends AbstractController
         return new JsonResponse([
             'message' => 'Success',
             'reload' => $reload ?? false,
-            'output' => $this->renderView('admin/artist/_new_modal.html.twig', [
+            'output' => $this->renderView('admin/artist/_artist_modal.html.twig', [
                 'form' => $form->createView(),
+                'title' => 'Новый художник'
             ])
         ], 200);
     }
@@ -74,9 +75,10 @@ class ArtistController extends AbstractController
         return new JsonResponse([
             'message' => 'Success',
             'reload' => $reload ?? false,
-            'output' => $this->renderView('admin/artist/_new_modal.html.twig', [
+            'output' => $this->renderView('admin/artist/_artist_modal.html.twig', [
                 'artist' => $artist,
                 'form' => $form->createView(),
+                'title' => 'Редактировать художника'
             ])
         ], 200);
     }
