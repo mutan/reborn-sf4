@@ -1,0 +1,2 @@
+# entity constraints
+~not_blank: Это поле не должно быть пустым.

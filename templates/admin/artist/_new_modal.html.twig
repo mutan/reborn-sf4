@@ -11,7 +11,7 @@
     {{ form_widget(form._token) }}
     {{ form_errors(form) }}
 <!--Body-->
-<div class="modal-body ui-front">{# без класса ui-front список autocomplite'a будет показан не рядом с полем поиска #}
+<div class="modal-body">
     {{ include('admin/artist/_form.html.twig') }}
 </div>
 <!--Footer-->
@@ -19,5 +19,3 @@
     <button class="btn btn-sm btn-narrow btn-dark-green" type="submit" formnovalidate>{{ button_label|default('Сохранить') }}</button>
 </div>
 {{ form_end(form, {'render_rest': false}) }}
-{# csrf_token генерируется отдельным полем, в form_end можно запретить рендер остальных полей #}
-{# {{ form_end(form, {'render_rest': false}) }} #}

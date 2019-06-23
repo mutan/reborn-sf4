@@ -6,7 +6,10 @@ require('../css/app.scss');
 
 const $ = require('jquery');
 //global.$ = global.jQuery = $;
-require('@fortawesome/fontawesome-free/js/all');
+
+//Если включить, теги i будут заменяться на svg
+//require('@fortawesome/fontawesome-free/js/all');
+
 require('popper.js/dist/popper');
 require('bootstrap/dist/js/bootstrap');
 
