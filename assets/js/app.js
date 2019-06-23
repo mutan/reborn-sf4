@@ -48,7 +48,7 @@ $(document).ready( function () {
 
 let Modal = {
     getModal: function() {
-        return $('#modalMain');
+        return $('#mainModal');
     },
 
     toggleButtonSpinnerIcon: function(e) {
@@ -110,6 +110,6 @@ let Modal = {
 
 $('#artist-new').on('click', (e)=> {
     Modal.handleMainModal(e, {
-        url: `admin/artist/new`
+        url: `/admin/artist/new`
     });
 });

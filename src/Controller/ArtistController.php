@@ -6,6 +6,7 @@ use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,9 +27,42 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="artist_new", methods={"GET","POST"})
+     * Форма создания заказа (ajax)
+     * @Route("/new", name="artist_new", methods={"POST"})
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function new(Request $request): Response
+    public function new(Request $request): JsonResponse
+    {
+        $artist = new Artist();
+        $form = $this->createForm(ArtistType::class, $artist);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($artist);
+            $entityManager->flush();
+
+            $this->addFlash('success', "Добавлен художник");
+            $reload = true;
+        }
+
+        return new JsonResponse([
+            'message' => 'Success',
+            'reload' => $reload ?? false,
+            'output' => $this->renderView('admin/artist/_new_modal.html.twig', [
+                'form' => $form->createView(),
+            ])
+        ], 200);
+    }
+
+
+
+
+    /**
+     * @Route("/new1", name="artist_new1", methods={"GET","POST"})
+     */
+    public function new1(Request $request): Response
     {
         $artist = new Artist();
         $form = $this->createForm(ArtistType::class, $artist);
