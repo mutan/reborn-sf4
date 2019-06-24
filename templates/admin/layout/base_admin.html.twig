@@ -58,6 +58,21 @@
         </div>
     </header>
 
+    <!-- Flash messages -->
+    {% for label, messages in app.flashes %}
+    <div class="container">
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <!-- /Flash messages -->
+
     <section id="main">
         <div class="container">
             <div class="row">

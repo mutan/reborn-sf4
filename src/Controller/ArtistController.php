@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/artist")
  */
-class ArtistController extends AbstractController
+class ArtistController extends BaseController
 {
     /**
      * @Route("/", name="artist_index", methods={"GET"})
@@ -27,7 +26,6 @@ class ArtistController extends AbstractController
     }
 
     /**
-     * Форма создания заказа (ajax)
      * @Route("/new", name="artist_new", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
@@ -39,10 +37,8 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($artist);
-            $entityManager->flush();
-
+            $this->getEm()->persist($artist);
+            $this->getEm()->flush();
             $this->addFlash('success', "Добавлен художник");
             $reload = true;
         }
@@ -66,8 +62,7 @@ class ArtistController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
+            $this->getEm()->flush();
             $this->addFlash('success', "Художник {$artist->getName()} обновлен.");
             $reload = true;
         }
@@ -83,17 +78,15 @@ class ArtistController extends AbstractController
         ], 200);
     }
 
-
-
     /**
      * @Route("/{id}", name="artist_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Artist $artist): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$artist->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($artist);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
+            $this->getEm()->remove($artist);
+            $this->getEm()->flush();
+            $this->addFlash('success','Художник удален.');
         }
 
         return $this->redirectToRoute('artist_index');
