@@ -2,39 +2,47 @@
 
 namespace App\Services;
 
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Contracts\Cache\ItemInterface;
+use App\Repository\ArtistRepository;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class MenuService
 {
-    /** @var FilesystemAdapter */
+    const CACHE_KEY_ARTIST_COUNT = 'artist_count';
+
+    /** @var AdapterInterface */
     protected $cache;
+    /** @var ArtistRepository */
+    private $artistRepository;
 
-    const MENU = [
-        'artists' => [
-            'label' => 'Художники',
-            'route' => 'artist_index',
-            'badge' => '',
-        ]
-    ];
-
-    public function __construct(FilesystemAdapter $cache)
+    public function __construct(AdapterInterface $cache, ArtistRepository $artistRepository)
     {
         $this->cache = $cache;
+        $this->artistRepository = $artistRepository;
     }
 
     public function getMenu()
     {
-        $cache = new FilesystemAdapter();
-
-        $value = $cache->get('my_cache_key', function (ItemInterface $item) {
-            $item->expiresAfter(3600);
-
-            // ... do some HTTP request or heavy computations
-            $computedValue = 'foobar';
-
-            return $computedValue;
-        });
+        return [
+            'artists' => [
+                'label' => 'Художники',
+                'route' => 'artist_index',
+                'badge' => $this->getArtistCount(),
+            ],
+            'editions' => [
+                'label' => 'Выпуски',
+                'route' => 'edition_index',
+                'badge' => 2,
+            ],
+        ];
     }
 
+    public function getArtistCount()
+    {
+        $item = $this->cache->getItem(self::CACHE_KEY_ARTIST_COUNT);
+        if (!$item->isHit()) {
+            $item->set($this->artistRepository->getCount());
+            $this->cache->save($item);
+        }
+        return $item->get();
+    }
 }
