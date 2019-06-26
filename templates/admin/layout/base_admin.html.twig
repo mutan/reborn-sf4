@@ -90,14 +90,14 @@
                             <div><span class="badge badge-secondary badge-pill">56</span></div>
                         </a>
                         <a class="list-group-item list-group-item-action d-flex"></a>
-                        <a href="{{ path('artist_index') }}" class="list-group-item list-group-item-action d-flex">
-                            <div class="mr-auto">Художники</div>
-                            <div><span class="badge badge-secondary badge-pill">10</span></div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action d-flex">
-                            <div class="mr-auto">Выпуски</div>
-                            <div><span class="badge badge-secondary badge-pill">10</span></div>
-                        </a>
+
+                        {% for item in menu_service.menu %}
+                            <a href="{{ path(item.route) }}" class="list-group-item list-group-item-action d-flex">
+                                <div class="mr-auto">{{ item.label }}</div>
+                                <div><span class="badge badge-secondary badge-pill">{{ item.badge }}</span></div>
+                            </a>
+                        {% endfor %}
+
                         <a href="#" class="list-group-item list-group-item-action d-flex">
                             <div class="mr-auto">Стихии</div>
                             <div><span class="badge badge-secondary badge-pill">10</span></div>

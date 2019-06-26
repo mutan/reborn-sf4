@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Artist;
+use App\Repository\Interfaces\CountableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,7 +13,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Artist[]    findAll()
  * @method Artist[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ArtistRepository extends ServiceEntityRepository
+class ArtistRepository extends ServiceEntityRepository implements CountableRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {

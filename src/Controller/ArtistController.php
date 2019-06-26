@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Artist;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
+use App\Services\CardService;
+use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +31,7 @@ class ArtistController extends BaseController
      * @Route("/new", name="artist_new", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
+     * @throws InvalidArgumentException
      */
     public function new(Request $request): JsonResponse
     {
@@ -39,6 +42,7 @@ class ArtistController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->persist($artist);
             $this->getEm()->flush();
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
             $this->addFlash('success', "Добавлен художник");
             $reload = true;
         }
@@ -86,6 +90,7 @@ class ArtistController extends BaseController
         if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
             $this->getEm()->remove($artist);
             $this->getEm()->flush();
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
             $this->addFlash('success','Художник удален.');
         }
 
