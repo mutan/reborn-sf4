@@ -125,3 +125,18 @@ $('.artist-edit').on('click', (e)=> {
         size: 'modal-sm'
     });
 });
+
+$('#edition-new').on('click', (e)=> {
+    Modal.handleMainModal(e, {
+        url: `/admin/edition/new`,
+        size: 'modal-sm'
+    });
+});
+
+$('.edition-edit').on('click', (e)=> {
+    let editionId = $(e.currentTarget).attr('data-edition-id');
+    Modal.handleMainModal(e, {
+        url: `/admin/edition/${editionId}/edit`,
+        size: 'modal-sm'
+    });
+});
