@@ -22,7 +22,37 @@ class MenuService
             'editions' => [
                 'label' => 'Выпуски',
                 'route' => 'artist_index',
-                'badge' => 2,
+                'badge' => $this->cardService->getEditionCount(),
+            ],
+            'elements' => [
+                'label' => 'Стихии',
+                'route' => 'element_index',
+                'badge' => $this->cardService->getElementCount(),
+            ],
+            'liquids' => [
+                'label' => 'Стихии',
+                'route' => 'liquid_index',
+                'badge' => $this->cardService->getLiquidCount(),
+            ],
+            'rarities' => [
+                'label' => 'Редкости',
+                'route' => 'rarity_index',
+                'badge' => $this->cardService->getRarityCount(),
+            ],
+            'subtypes' => [
+                'label' => 'Подтипы',
+                'route' => 'subtype_index',
+                'badge' => $this->cardService->getSubtypeCount(),
+            ],
+            'supertypes' => [
+                'label' => 'Супертипы',
+                'route' => 'supertype_index',
+                'badge' => $this->cardService->getSupertypeCount(),
+            ],
+            'types' => [
+                'label' => 'Типы',
+                'route' => 'type_index',
+                'badge' => $this->cardService->getTypeCount(),
             ],
         ];
     }
