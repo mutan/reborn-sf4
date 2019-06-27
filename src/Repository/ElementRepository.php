@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Element;
+use App\Repository\Interfaces\CountableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,39 +13,17 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Element[]    findAll()
  * @method Element[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ElementRepository extends ServiceEntityRepository
+class ElementRepository extends ServiceEntityRepository implements CountableRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Element::class);
     }
 
-    // /**
-    //  * @return Element[] Returns an array of Element objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCount(): int
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->select('COUNT(e.id)')
+            ->getQuery()->getSingleScalarResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Element
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

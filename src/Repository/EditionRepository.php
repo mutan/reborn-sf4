@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Edition;
+use App\Repository\Interfaces\CountableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,39 +13,17 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Edition[]    findAll()
  * @method Edition[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EditionRepository extends ServiceEntityRepository
+class EditionRepository extends ServiceEntityRepository implements CountableRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Edition::class);
     }
 
-    // /**
-    //  * @return Edition[] Returns an array of Edition objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCount(): int
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->select('COUNT(e.id)')
+            ->getQuery()->getSingleScalarResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Edition
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

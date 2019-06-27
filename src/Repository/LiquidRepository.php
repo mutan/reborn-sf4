@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Liquid;
+use App\Repository\Interfaces\CountableRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -12,39 +13,17 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Liquid[]    findAll()
  * @method Liquid[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LiquidRepository extends ServiceEntityRepository
+class LiquidRepository extends ServiceEntityRepository implements CountableRepositoryInterface
 {
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Liquid::class);
     }
 
-    // /**
-    //  * @return Liquid[] Returns an array of Liquid objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getCount(): int
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->select('COUNT(l.id)')
+            ->getQuery()->getSingleScalarResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Liquid
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
