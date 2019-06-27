@@ -48,7 +48,7 @@ class RebuildDatabase extends Command
             ['doctrine:database:create', ['command' => 'doctrine:database:create']],
             ['make:migration', ['command' => 'make:migration']],
             ['doctrine:migrations:migrate', ['command' => 'doctrine:migrations:migrate']],
-            //['doctrine:fixtures:load', ['command' => 'doctrine:fixtures:load']],
+            ['doctrine:fixtures:load', ['command' => 'doctrine:fixtures:load']],
         ];
         foreach ($commands as $command) {
             $this->executeSubCommand($command[0], $command[1], $output);
