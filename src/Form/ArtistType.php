@@ -13,7 +13,7 @@ class ArtistType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class, ['attr' => ['autofocus' => true]])
+            ->add('name',TextType::class)
         ;
     }
 

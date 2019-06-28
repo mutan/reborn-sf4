@@ -1,0 +1,48 @@
+{% extends 'admin/layout/base_admin.html.twig' %}
+
+{% block title %}Художники{% endblock %}
+
+{% block header %}
+    <div class="col-md-10 d-flex align-items-center justify-content-start">
+        <h1><i class="fas fa-cogs"></i> Художники <small class="d-none d-lg-inline text-secondary"></small></h1>
+    </div>
+    <div class="col-md-2 d-flex align-items-center justify-content-end">
+        <div class="dropdown create">
+            <button id="element-new" class="btn btn-outline-light" type="button">
+                <i class="fas fa-plus"></i> Добавить
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <table class="table table-hover datatable">
+        <thead>
+            <tr>
+                <th width="1%">Id</th>
+                <th>Название</th>
+                <th>Изображение</th>
+                <th width="1%">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for element in elements %}
+            <tr>
+                <td>{{ element.id }}</td>
+                <td>{{ element.name }}</td>
+                <td>{{ element.image }}</td>
+                <td>
+                    <a class="btn btn-sm btn-danger element-edit" href="{{ path('element_edit', {'id': element.id}) }}" data-element-id="{{ element.id }}">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    {{ include('admin/element/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Записей не найдено.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

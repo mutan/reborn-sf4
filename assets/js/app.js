@@ -144,3 +144,18 @@ $('.edition-edit').on('click', (e)=> {
         url: `/admin/edition/${editionId}/edit`
     });
 });
+
+$('#element-new').on('click', (e)=> {
+    Modal.handleMainModal(e, {
+        url: `/admin/element/new`,
+        size: 'modal-sm'
+    });
+});
+
+$('.element-edit').on('click', (e)=> {
+    let elementId = $(e.currentTarget).attr('data-element-id');
+    Modal.handleMainModal(e, {
+        url: `/admin/element/${elementId}/edit`,
+        size: 'modal-sm'
+    });
+});

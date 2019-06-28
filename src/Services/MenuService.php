@@ -26,7 +26,7 @@ class MenuService
             ],
             'elements' => [
                 'label' => 'Стихии',
-                'route' => 'artist_index',
+                'route' => 'element_index',
                 'badge' => $this->cardService->getElementCount(),
             ],
             'liquids' => [
