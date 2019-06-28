@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EditionRepository")
@@ -20,11 +21,14 @@ class Edition
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="~not_blank")
+     * @Assert\Range(min = 1, max = 999)
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $name;
 
@@ -35,11 +39,14 @@ class Edition
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $code;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="~not_blank")
+     * @Assert\Range(min = 1, max = 999)
      */
     private $quantity;
 
@@ -68,7 +75,7 @@ class Edition
         return $this->number;
     }
 
-    public function setNumber(int $number): self
+    public function setNumber($number): self
     {
         $this->number = $number;
 
@@ -80,7 +87,7 @@ class Edition
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -104,7 +111,7 @@ class Edition
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(?string $code): self
     {
         $this->code = $code;
 
@@ -116,7 +123,7 @@ class Edition
         return $this->quantity;
     }
 
-    public function setQuantity(int $quantity): self
+    public function setQuantity($quantity): self
     {
         $this->quantity = $quantity;
 

@@ -23,7 +23,7 @@ class EditionController extends BaseController
     public function index(EditionRepository $editionRepository): Response
     {
         return $this->render('admin/edition/index.html.twig', [
-            'editions' => $editionRepository->findAll(),
+            'editions' => $editionRepository->findAllOrderedByNumber(),
         ]);
     }
 

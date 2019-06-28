@@ -20,6 +20,11 @@ class EditionRepository extends ServiceEntityRepository implements CountableRepo
         parent::__construct($registry, Edition::class);
     }
 
+    public function findAllOrderedByNumber()
+    {
+        return $this->findBy(array(), array('number' => 'ASC'));
+    }
+
     public function getCount(): int
     {
         return $this->createQueryBuilder('e')

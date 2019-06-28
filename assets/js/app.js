@@ -18,6 +18,12 @@ require('datatables.net-bs4/js/dataTables.bootstrap4');
 
 /* CUSTOM JS */
 
+/* Bootstrap Tooltips Initialization */
+
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+});
+
 /* Datatables */
 
 $(document).ready( function () {
@@ -128,15 +134,13 @@ $('.artist-edit').on('click', (e)=> {
 
 $('#edition-new').on('click', (e)=> {
     Modal.handleMainModal(e, {
-        url: `/admin/edition/new`,
-        size: 'modal-sm'
+        url: `/admin/edition/new`
     });
 });
 
 $('.edition-edit').on('click', (e)=> {
     let editionId = $(e.currentTarget).attr('data-edition-id');
     Modal.handleMainModal(e, {
-        url: `/admin/edition/${editionId}/edit`,
-        size: 'modal-sm'
+        url: `/admin/edition/${editionId}/edit`
     });
 });

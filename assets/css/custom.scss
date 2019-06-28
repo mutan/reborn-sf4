@@ -4,6 +4,14 @@ html, body {
   //font-family: Ubuntu, sans-serif;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+.btn {
+  border-radius: 0;
+}
+
 /* Navbar */
 
 .navbar {
@@ -58,7 +66,5 @@ html, body {
 
 
 
-.btn {
-  border-radius: 0;
-}
+
 

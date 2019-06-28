@@ -16,25 +16,36 @@
 {% endblock %}
 
 {% block body %}
-    <table class="table table-hover datatable">
+    <table class="table table-hover table-responsive">
         <thead>
             <tr>
-                <th width="1%">Id</th>
-                <th>Name</th>
+                <th width="1%">Номер</th>
+                <th>Код</th>
+                <th>Название</th>
+                <th>Изображение</th>
+                <th>Кол-во карт</th>
                 <th width="1%">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for edition in editions %}
             <tr>
-                <td>{{ edition.id }}</td>
+                <td>{{ edition.number }}</td>
+                <td>{{ edition.code }}</td>
                 <td>{{ edition.name }}</td>
+                <td>{{ edition.image }}</td>
+                <td>{{ edition.quantity }}</td>
                 <td>
                     <a class="btn btn-sm btn-danger edition-edit" href="{{ path('edition_edit', {'id': edition.id}) }}" data-edition-id="{{ edition.id }}">
                         <i class="fas fa-edit"></i>
                     </a>
                     {{ include('admin/edition/_delete_form.html.twig') }}
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="4" width="20%"><strong>Краткое описание:</strong> {{ edition.description }}</td>
+                <td></td>
             </tr>
         {% else %}
             <tr>
