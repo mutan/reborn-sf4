@@ -6,14 +6,14 @@
 /* BOOTSTRAP VARIABLES */
 
 /* Navbar color scheme vars */
-$bgDefault      : #e74c3c;
-$bgHighlight    : #c0392b;
-$colDefault     : #ecf0f1;
-$colHighlight   : #ffbbbc;
+$bgDefault      : #3F729B; //#e74c3c
+$bgHighlight    : darken($bgDefault, 10%); //#c0392b
+$colDefault     : #ecf0f1; //#ecf0f1
+$colHighlight   : lighten($bgDefault, 35%); //#ffbbbc
 $dropDown       : false;
 
 /* Button vars */
-$mynewcolor     : #3F729B;
+$btnDefault     : $bgDefault;
 
 
 /* CSS LIBRARIES */
@@ -30,16 +30,30 @@ $mynewcolor     : #3F729B;
 
 /* BOOTSTRAP STYLES */
 
-.btn-primary {
-  @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), darken($mynewcolor, 10%), lighten($mynewcolor,5%), lighten($mynewcolor, 10%), darken($mynewcolor,30%));
+
+/* Button mixin */
+.btn-default {
+  @include button-variant($btnDefault, darken($btnDefault, 7.5%), darken($btnDefault, 10%), lighten($btnDefault,5%), lighten($btnDefault, 10%), darken($btnDefault,30%));
+}
+.btn-outline-default {
+  @include button-outline-variant($btnDefault, #222222, lighten($btnDefault,5%), $btnDefault);
 }
 
-.btn-outline-primary {
-  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+/* Menu list group */
+.list-group-hover .list-group-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+  background-color: $bgDefault;
+  border-color: $bgHighlight;
+}
+.page-link, .page-link:hover {
+  color: #4285F4;
 }
 
 /* Modal */
-
 .modal-content  {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -48,7 +62,6 @@ $mynewcolor     : #3F729B;
 
 /* Navbar color scheme */
 /* https://work.smarchal.com/twbscolor/ */
-
 .navbar {
   background-color: $bgDefault;
   .navbar-brand {
