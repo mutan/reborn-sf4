@@ -1,0 +1,5 @@
+<form class="d-inline" method="post" action="{{ path('rarity_delete', {'id': rarity.id}) }}" onsubmit="return confirm('Точно удалить?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ rarity.id) }}">
+    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+</form>

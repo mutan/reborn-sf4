@@ -31,12 +31,12 @@ class MenuService
             ],
             'liquids' => [
                 'label' => 'Жидкости',
-                'route' => 'artist_index',
+                'route' => 'liquid_index',
                 'badge' => $this->cardService->getLiquidCount(),
             ],
             'rarities' => [
                 'label' => 'Редкости',
-                'route' => 'artist_index',
+                'route' => 'rarity_index',
                 'badge' => $this->cardService->getRarityCount(),
             ],
             'subtypes' => [
