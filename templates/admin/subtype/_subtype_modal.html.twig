@@ -1,0 +1,26 @@
+{% form_theme form 'common/form/_errors.html.twig' %}
+
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+{{ form_start(form, {'attr': {'id': 'subtype-new-form'}}) }}
+    {{ form_widget(form._token) }}
+    {{ form_errors(form) }}
+<!--Body-->
+<div class="modal-body">
+    <div class="form-row">
+        <div class="form-group col-12">
+            {{ form_label(form.name, 'Название') }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+    </div>
+</div>
+<!--Footer-->
+<div class="modal-footer">
+    <button class="btn btn-sm btn-outline-secondary" type="submit" formnovalidate>{{ button_label|default('Сохранить') }}</button>
+</div>
+{{ form_end(form, {'render_rest': false}) }}

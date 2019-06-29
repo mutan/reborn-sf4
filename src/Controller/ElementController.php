@@ -43,7 +43,7 @@ class ElementController extends BaseController
             $this->getEm()->persist($element);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
-            $this->addFlash('success', "Добавлена стихия");
+            $this->addFlash('success', "Стихия добавлена");
             $reload = true;
         }
 
@@ -67,7 +67,7 @@ class ElementController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->flush();
-            $this->addFlash('success', "Художник {$element->getName()} обновлен.");
+            $this->addFlash('success', "Стихия {$element->getName()} обновлена");
             $reload = true;
         }
 
@@ -77,7 +77,7 @@ class ElementController extends BaseController
             'output' => $this->renderView('admin/element/_element_modal.html.twig', [
                 'element' => $element,
                 'form' => $form->createView(),
-                'title' => 'Редактировать художника'
+                'title' => 'Редактировать стихию'
             ])
         ], 200);
     }
@@ -91,7 +91,7 @@ class ElementController extends BaseController
             $this->getEm()->remove($element);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
-            $this->addFlash('success','Художник удален.');
+            $this->addFlash('success','Стихия удалена');
         }
 
         return $this->redirectToRoute('element_index');

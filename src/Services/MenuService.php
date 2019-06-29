@@ -41,17 +41,17 @@ class MenuService
             ],
             'subtypes' => [
                 'label' => 'Подтипы',
-                'route' => 'artist_index',
+                'route' => 'subtype_index',
                 'badge' => $this->cardService->getSubtypeCount(),
             ],
             'supertypes' => [
                 'label' => 'Супертипы',
-                'route' => 'artist_index',
+                'route' => 'supertype_index',
                 'badge' => $this->cardService->getSupertypeCount(),
             ],
             'types' => [
                 'label' => 'Типы',
-                'route' => 'artist_index',
+                'route' => 'type_index',
                 'badge' => $this->cardService->getTypeCount(),
             ],
         ];

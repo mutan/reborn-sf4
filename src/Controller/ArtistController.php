@@ -67,7 +67,7 @@ class ArtistController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->flush();
-            $this->addFlash('success', "Художник {$artist->getName()} обновлен.");
+            $this->addFlash('success', "Художник {$artist->getName()} обновлен");
             $reload = true;
         }
 
@@ -91,7 +91,7 @@ class ArtistController extends BaseController
             $this->getEm()->remove($artist);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
-            $this->addFlash('success','Художник удален.');
+            $this->addFlash('success','Художник удален');
         }
 
         return $this->redirectToRoute('artist_index');

@@ -43,7 +43,7 @@ class EditionController extends BaseController
             $this->getEm()->persist($edition);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_EDITION_COUNT);
-            $this->addFlash('success', "Добавлен выпуск");
+            $this->addFlash('success', "Выпуск добавлен");
             $reload = true;
         }
 
@@ -67,7 +67,7 @@ class EditionController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->flush();
-            $this->addFlash('success', "Выпуск {$edition->getName()} обновлен.");
+            $this->addFlash('success', "Выпуск {$edition->getName()} обновлен");
             $reload = true;
         }
 
@@ -91,7 +91,7 @@ class EditionController extends BaseController
             $this->getEm()->remove($edition);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_EDITION_COUNT);
-            $this->addFlash('success','Выпуск удален.');
+            $this->addFlash('success','Выпуск удален');
         }
 
         return $this->redirectToRoute('edition_index');
