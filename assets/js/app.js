@@ -117,6 +117,21 @@ let Modal = {
     }
 };
 
+$('#card-new').on('click', (e)=> {
+    Modal.handleMainModal(e, {
+        url: `/admin/card/new`,
+        size: 'modal-lg'
+    });
+});
+
+$('.card-edit').on('click', (e)=> {
+    let cardId = $(e.currentTarget).attr('data-card-id');
+    Modal.handleMainModal(e, {
+        url: `/admin/card/${cardId}/edit`,
+        size: 'modal-lg'
+    });
+});
+
 $('#artist-new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/artist/new`,
