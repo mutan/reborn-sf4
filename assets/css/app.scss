@@ -30,7 +30,6 @@ $btnDefault     : $bgDefault;
 
 /* BOOTSTRAP STYLES */
 
-
 /* Button mixin */
 .btn-default {
   @include button-variant($btnDefault, darken($btnDefault, 7.5%), darken($btnDefault, 10%), lighten($btnDefault,5%), lighten($btnDefault, 10%), darken($btnDefault,30%));
