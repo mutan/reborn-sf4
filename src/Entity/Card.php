@@ -54,6 +54,7 @@ class Card
     private $flying;
 
     /**
+     * 0 у артефактов, 1+ у существ, NULL у летающих
      * @ORM\Column(type="integer", nullable=true)
      */
     private $movement;
@@ -65,6 +66,7 @@ class Card
     private $rarity;
 
     /**
+     * 0+ у существ, NULL у остальных
      * @ORM\Column(type="integer", nullable=true)
      */
     private $power_weak;

@@ -21,6 +21,7 @@ use App\Repository\SupertypeRepository;
 use App\Repository\TypeRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,12 +36,12 @@ class CardType extends AbstractType
             ->add('name',TextType::class)
             ->add('image',TextType::class)
             ->add('lives',TextType::class)
-            ->add('flying',TextType::class)
+            ->add('flying',CheckboxType::class)
             ->add('movement',TextType::class)
             ->add('powerWeak',TextType::class)
             ->add('powerMedium',TextType::class)
             ->add('powerStrong',TextType::class)
-            ->add('flavor',TextType::class)
+            ->add('flavor',TextareaType::class)
             ->add('number',TextType::class)
             ->add('text',TextareaType::class)
             ->add('erratas',TextareaType::class)
@@ -75,19 +76,19 @@ class CardType extends AbstractType
                     return $liquidRepository->createQueryBuilder('l');
                 }
             ])
-            ->add('Subtypes', EntityType::class, [
+            ->add('subtypes', EntityType::class, [
                 'class' => Subtype::class,
                 'query_builder' => function (SubtypeRepository $subtypeRepository) {
                     return $subtypeRepository->createQueryBuilder('s');
                 }
             ])
-            ->add('Supertypes', EntityType::class, [
+            ->add('supertypes', EntityType::class, [
                 'class' => Supertype::class,
                 'query_builder' => function (SupertypeRepository $supertypeRepository) {
                     return $supertypeRepository->createQueryBuilder('s');
                 }
             ])
-            ->add('Types', EntityType::class, [
+            ->add('types', EntityType::class, [
                 'class' => Type::class,
                 'query_builder' => function (TypeRepository $typeRepository) {
                     return $typeRepository->createQueryBuilder('t');
