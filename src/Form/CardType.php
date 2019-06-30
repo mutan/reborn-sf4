@@ -62,37 +62,43 @@ class CardType extends AbstractType
                 'class' => Artist::class,
                 'query_builder' => function (ArtistRepository $artistRepository) {
                     return $artistRepository->createQueryBuilder('a');
-                }
+                },
+                'multiple' => true,
             ])
             ->add('elements', EntityType::class, [
                 'class' => Element::class,
                 'query_builder' => function (ElementRepository $elementRepository) {
                     return $elementRepository->createQueryBuilder('e');
-                }
+                },
+                'multiple' => true,
             ])
             ->add('liquids', EntityType::class, [
                 'class' => Liquid::class,
                 'query_builder' => function (LiquidRepository $liquidRepository) {
                     return $liquidRepository->createQueryBuilder('l');
-                }
+                },
+                'multiple' => true,
             ])
             ->add('subtypes', EntityType::class, [
                 'class' => Subtype::class,
                 'query_builder' => function (SubtypeRepository $subtypeRepository) {
                     return $subtypeRepository->createQueryBuilder('s');
-                }
+                },
+                'multiple' => true,
             ])
             ->add('supertypes', EntityType::class, [
                 'class' => Supertype::class,
                 'query_builder' => function (SupertypeRepository $supertypeRepository) {
                     return $supertypeRepository->createQueryBuilder('s');
-                }
+                },
+                'multiple' => true,
             ])
             ->add('types', EntityType::class, [
                 'class' => Type::class,
                 'query_builder' => function (TypeRepository $typeRepository) {
                     return $typeRepository->createQueryBuilder('t');
-                }
+                },
+                'multiple' => true,
             ])
         ;
     }

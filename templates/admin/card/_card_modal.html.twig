@@ -21,16 +21,16 @@
             {{ form_label(form.edition, 'Выпуск') }}
             {{ form_widget(form.edition, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
-        <div class="form-group col-sm-12 col-md-4">
+        <div class="form-group col-sm-6 col-md-2">
+            {{ form_label(form.number, 'Номер') }}
+            {{ form_widget(form.number, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+        <div class="form-group col-sm-6 col-md-2">
             {{ form_label(form.rarity, 'Редкость') }}
             {{ form_widget(form.rarity, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col">
-            {{ form_label(form.number, 'Номер') }}
-            {{ form_widget(form.number, {'attr': {'class': 'form-control-sm'}}) }}
-        </div>
         <div class="form-group col">
             {{ form_label(form.cost, 'Стоимость') }}
             {{ form_widget(form.cost, {'attr': {'class': 'form-control-sm'}}) }}
@@ -40,12 +40,18 @@
             {{ form_widget(form.lives, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
 
-
-
-
-
-
-        <div class="form-group col-6">
+        <div class="form-group col">
+            <label class="required">Движение</label>
+            <div class="input-group input-group-sm mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        Flying <input type="checkbox" id="card_flying" name="card[flying]" value="{{ form.vars.value.flying }}" required="required">
+                    </div>
+                </div>
+                <input type="text" class="form-control" id="card_movement" name="card[movement]" value="{{ form.vars.value.movement }}" required="required">
+            </div>
+        </div>
+        <div class="form-group col">
             <label class="required">Простой удар</label>
             <div class="input-group input-group-sm">
                 <input type="text" id="card_powerWeak" name="card[powerWeak]" class="form-control" value="{{ form.vars.value.powerweak }}" required="required">
@@ -54,56 +60,37 @@
 
             </div>
         </div>
-    </div>
-    <div class="form-row">
-
-
-        <div class="form-group col-6">
+        <div class="form-group col-4">
             {{ form_label(form.image, 'Изображение') }}
             {{ form_widget(form.image, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
-
-
-        <div class="form-group col-6">
-            {{ form_label(form.flying, 'Летающий') }}
-            {{ form_widget(form.flying, {'attr': {'class': 'form-control-sm'}}) }}
-        </div>
-        <div class="form-group col-6">
-            {{ form_label(form.movement, 'Движение') }}
-            {{ form_widget(form.movement, {'attr': {'class': 'form-control-sm'}}) }}
-        </div>
     </div>
-
-
-
-
-
     <div class="form-row">
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.artists, 'Художники') }}
-            {{ form_widget(form.artists, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.artists, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.elements, 'Стихии') }}
-            {{ form_widget(form.elements, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.elements, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.liquids, 'Жидкости') }}
-            {{ form_widget(form.liquids, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.liquids, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.supertypes, 'Супертипы') }}
-            {{ form_widget(form.supertypes, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.supertypes, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.types, 'Типы') }}
-            {{ form_widget(form.types, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.types, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
         <div class="form-group col-md-12 col-lg-4">
             {{ form_label(form.subtypes, 'Подтипы') }}
-            {{ form_widget(form.subtypes, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 5}}) }}
+            {{ form_widget(form.subtypes, {'attr': {'class': 'form-control-sm', 'size': 5}}) }}
         </div>
     </div>
     <div class="form-row">
