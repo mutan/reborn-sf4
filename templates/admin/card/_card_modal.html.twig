@@ -23,24 +23,14 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-4">
-            {{ form_label(form.number, 'Порядковый номер') }}
-            {{ form_widget(form.number, {'attr': {'class': 'form-control-sm'}}) }}
-        </div>
-        <div class="form-group col-4">
-            {{ form_label(form.code, 'Код') }}
-            {{ form_widget(form.code, {'attr': {'class': 'form-control-sm'}}) }}
-        </div>
-        <div class="form-group col-4">
-            {{ form_label(form.quantity, 'Кол-во карт') }}
-            {{ form_widget(form.quantity, {'attr': {'class': 'form-control-sm'}}) }}
+        <div class="form-group col-12">
+            {{ form_label(form.liquids, 'Жидкости') }}
+            {{ form_widget(form.liquids, {'attr': {'class': 'form-control-sm', 'multiple': 'multiple', 'size': 7}}) }}
         </div>
     </div>
+
     <div class="form-row">
-        <div class="form-group col-12">
-            {{ form_label(form.description, 'Краткое описание выпуска') }}
-            {{ form_widget(form.description, {'attr': {'class': 'form-control-sm', 'rows': 5}}) }}
-        </div>
+
     </div>
 </div>
 <!--Footer-->
