@@ -22,7 +22,7 @@ class EditionRepository extends ServiceEntityRepository implements CountableRepo
 
     public function findAllOrderedByNumber()
     {
-        return $this->findBy(array(), array('number' => 'ASC'));
+        return $this->findBy([], ['number' => 'ASC']);
     }
 
     public function getCount(): int

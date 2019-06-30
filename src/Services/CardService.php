@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repository\ArtistRepository;
+use App\Repository\CardRepository;
 use App\Repository\EditionRepository;
 use App\Repository\ElementRepository;
 use App\Repository\Interfaces\CountableRepositoryInterface;
@@ -15,6 +16,7 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 class CardService
 {
+    const CACHE_KEY_CARD_COUNT = 'card_count';
     const CACHE_KEY_ARTIST_COUNT = 'artist_count';
     const CACHE_KEY_EDITION_COUNT = 'edition_count';
     const CACHE_KEY_ELEMENT_COUNT = 'element_count';
@@ -26,6 +28,7 @@ class CardService
 
     protected $cache;
     private $artistRepository;
+    private $cardRepository;
     private $editionRepository;
     private $elementRepository;
     private $liquidRepository;
@@ -37,6 +40,7 @@ class CardService
     public function __construct(
         AdapterInterface $cache,
         ArtistRepository $artistRepository,
+        CardRepository $cardRepository,
         EditionRepository $editionRepository,
         ElementRepository $elementRepository,
         LiquidRepository $liquidRepository,
@@ -47,6 +51,7 @@ class CardService
     )
     {
         $this->cache = $cache;
+        $this->cardRepository = $cardRepository;
         $this->artistRepository = $artistRepository;
         $this->editionRepository = $editionRepository;
         $this->elementRepository = $elementRepository;
@@ -55,6 +60,11 @@ class CardService
         $this->subtypeRepository = $subtypeRepository;
         $this->supertypeRepository = $supertypeRepository;
         $this->typeRepository = $typeRepository;
+    }
+
+    public function getCardCount()
+    {
+        return $this->getCachedItem(self::CACHE_KEY_CARD_COUNT, $this->cardRepository);
     }
 
     public function getArtistCount()

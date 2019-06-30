@@ -14,6 +14,11 @@ class MenuService
     public function getMenu()
     {
         return [
+            'cards' => [
+                'label' => 'Карты',
+                'route' => 'card_index',
+                'badge' => $this->cardService->getCardCount(),
+            ],
             'artists' => [
                 'label' => 'Художники',
                 'route' => 'artist_index',

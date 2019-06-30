@@ -43,7 +43,7 @@ class ArtistController extends BaseController
             $this->getEm()->persist($artist);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
-            $this->addFlash('success', "Добавлен художник");
+            $this->addFlash('success', "Художник добавлен");
             $reload = true;
         }
 

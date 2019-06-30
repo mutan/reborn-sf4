@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Artist;
+use App\Entity\Card;
 use App\Entity\Edition;
 use App\Entity\Element;
 use App\Entity\Liquid;
@@ -10,6 +11,14 @@ use App\Entity\Rarity;
 use App\Entity\Subtype;
 use App\Entity\Supertype;
 use App\Entity\Type;
+use App\Repository\ArtistRepository;
+use App\Repository\EditionRepository;
+use App\Repository\ElementRepository;
+use App\Repository\LiquidRepository;
+use App\Repository\RarityRepository;
+use App\Repository\SubtypeRepository;
+use App\Repository\SupertypeRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -18,14 +27,40 @@ class AppFixtures extends Fixture
 {
     private $parameterBag;
     private $dataDir;
+    private $artistRepository;
+    private $editionRepository;
+    private $elementRepository;
+    private $liquidRepository;
+    private $rarityRepository;
+    private $subtypeRepository;
+    private $supertypeRepository;
+    private $typeRepository;
 
-    public function __construct(ParameterBagInterface $parameterBag)
+    public function __construct(
+        ParameterBagInterface $parameterBag,
+        ArtistRepository $artistRepository,
+        EditionRepository $editionRepository,
+        ElementRepository $elementRepository,
+        LiquidRepository $liquidRepository,
+        RarityRepository $rarityRepository,
+        SubtypeRepository $subtypeRepository,
+        SupertypeRepository $supertypeRepository,
+        TypeRepository $typeRepository
+    )
     {
         $this->parameterBag = $parameterBag;
         $this->dataDir = $this->parameterBag->get('kernel.root_dir')
             . DIRECTORY_SEPARATOR . 'DataFixtures'
             . DIRECTORY_SEPARATOR . 'data'
             . DIRECTORY_SEPARATOR;
+        $this->artistRepository = $artistRepository;
+        $this->editionRepository = $editionRepository;
+        $this->elementRepository = $elementRepository;
+        $this->liquidRepository = $liquidRepository;
+        $this->rarityRepository = $rarityRepository;
+        $this->subtypeRepository = $subtypeRepository;
+        $this->supertypeRepository = $supertypeRepository;
+        $this->typeRepository = $typeRepository;
     }
 
     public function getJsonAsObj($fileName)
@@ -104,6 +139,47 @@ class AppFixtures extends Fixture
             $type = new Type();
             $type->setName($item->name);
             $manager->persist($type);
+        }
+        $manager->flush();
+
+        /* Cards */
+        foreach ($this->getJsonAsObj('cards.json') as $item) {
+            $card = new Card();
+            foreach ($item->artists as $artist) {
+                $card->addArtist($this->artistRepository->findOneBy(['name' => $artist], []));
+            }
+            foreach ($item->elements as $element) {
+                $card->addElement($this->elementRepository->findOneBy(['name' => $element], []));
+            }
+            foreach ($item->liquids as $liquid) {
+                $card->addLiquid($this->liquidRepository->findOneBy(['name' => $liquid], []));
+            }
+            foreach ($item->supertypes as $supertype) {
+                $card->addSupertype($this->supertypeRepository->findOneBy(['name' => $supertype], []));
+            }
+            foreach ($item->subtypes as $subtype) {
+                $card->addSubtype($this->subtypeRepository->findOneBy(['name' => $subtype], []));
+            }
+            foreach ($item->types as $type) {
+                $card->addType($this->typeRepository->findOneBy(['name' => $type], []));
+            }
+            $card->setEdition($this->editionRepository->findOneBy(['name' => $item->edition], []));
+            $card->setRarity($this->rarityRepository->findOneBy(['name' => $item->rarity], []));
+            $card->setCost($item->cost);
+            $card->setName($item->name);
+            $card->setImage($item->image);
+            $card->setLives($item->lives);
+            $card->setFlying($item->flying);
+            $card->setMovement($item->movement);
+            $card->setPowerWeak($item->power_weak);
+            $card->setPowerMedium($item->power_medium);
+            $card->setPowerStrong($item->power_strong);
+            $card->setText($item->text);
+            $card->setFlavor($item->flavor);
+            $card->setNumber($item->number);
+            $card->setErratas($item->erratas);
+            $card->setComments($item->comments);
+            $manager->persist($card);
         }
         $manager->flush();
     }

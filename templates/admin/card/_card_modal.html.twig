@@ -1,0 +1,50 @@
+{% form_theme form 'common/form/_errors.html.twig' %}
+
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+
+{{ form_start(form, {'attr': {'id': 'card-new-form'}}) }}
+    {{ form_widget(form._token) }}
+    {{ form_errors(form) }}
+<!--Body-->
+<div class="modal-body">
+    <div class="form-row">
+        <div class="form-group col-6">
+            {{ form_label(form.name, 'Название') }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+        <div class="form-group col-6">
+            {{ form_label(form.image, 'Изображение') }}
+            {{ form_widget(form.image, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-4">
+            {{ form_label(form.number, 'Порядковый номер') }}
+            {{ form_widget(form.number, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+        <div class="form-group col-4">
+            {{ form_label(form.code, 'Код') }}
+            {{ form_widget(form.code, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+        <div class="form-group col-4">
+            {{ form_label(form.quantity, 'Кол-во карт') }}
+            {{ form_widget(form.quantity, {'attr': {'class': 'form-control-sm'}}) }}
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-12">
+            {{ form_label(form.description, 'Краткое описание выпуска') }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control-sm', 'rows': 5}}) }}
+        </div>
+    </div>
+</div>
+<!--Footer-->
+<div class="modal-footer">
+    <button class="btn btn-sm btn-default" type="submit" formnovalidate>{{ button_label|default('Сохранить') }}</button>
+</div>
+{{ form_end(form, {'render_rest': false}) }}
