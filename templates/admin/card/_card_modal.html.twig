@@ -31,27 +31,27 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col">
+        <div class="form-group col-sm-6 col-md col-lg">
             {{ form_label(form.cost, 'Стоимость') }}
             {{ form_widget(form.cost, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
-        <div class="form-group col">
+        <div class="form-group col-sm-6 col-md col-lg">
             {{ form_label(form.lives, 'Жизни') }}
             {{ form_widget(form.lives, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
 
-        <div class="form-group col">
-            <label class="required">Движение</label>
+        <div class="form-group col-sm-6 col-md col-lg">
+            <label class="required">Летающий/движение</label>
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        Flying <input type="checkbox" id="card_flying" name="card[flying]" value="{{ form.vars.value.flying }}" required="required">
+                        <img src="{{ asset('build/icons/flying.png') }}" class="img-fluid pr-2" alt="Летающий"> <input type="checkbox" id="card_flying" name="card[flying]" value="{{ form.vars.value.flying }}" {% if form.vars.value.flying %} checked="checked"{% endif %} required="required">
                     </div>
                 </div>
                 <input type="text" class="form-control" id="card_movement" name="card[movement]" value="{{ form.vars.value.movement }}" required="required">
             </div>
         </div>
-        <div class="form-group col">
+        <div class="form-group col-sm-6 col-md-6 col-lg">
             <label class="required">Простой удар</label>
             <div class="input-group input-group-sm">
                 <input type="text" id="card_powerWeak" name="card[powerWeak]" class="form-control" value="{{ form.vars.value.powerweak }}" required="required">
@@ -60,7 +60,7 @@
 
             </div>
         </div>
-        <div class="form-group col-4">
+        <div class="form-group col-sm-6 col-md-6 col-lg">
             {{ form_label(form.image, 'Изображение') }}
             {{ form_widget(form.image, {'attr': {'class': 'form-control-sm'}}) }}
         </div>
