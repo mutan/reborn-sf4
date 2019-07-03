@@ -32,7 +32,8 @@ Encore
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/favicon.ico', to: '' },
         { from: './assets/images', to: 'images' },
-        { from: './assets/icons', to: 'icons' }
+        { from: './assets/icons', to: 'icons' },
+        { from: './node_modules/tinymce/skins', to: 'skins' }
     ]))
 ;
 

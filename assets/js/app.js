@@ -16,6 +16,16 @@ require('bootstrap/dist/js/bootstrap');
 require('datatables.net/js/jquery.dataTables');
 require('datatables.net-bs4/js/dataTables.bootstrap4');
 
+const tinymce = require('tinymce/tinymce');
+require('tinymce/themes/silver'); // A theme is also required
+require('tinymce/plugins/paste'); // Any plugins you want to use has to be imported
+require('tinymce/plugins/link');
+require('tinymce/plugins/code');
+require('tinymce/plugins/image');
+require('tinymce/plugins/advlist');
+require('tinymce/plugins/lists');
+
+
 /* CUSTOM JS */
 
 /* Bootstrap Tooltips Initialization */
@@ -27,30 +37,7 @@ $(function () {
 /* Datatables */
 
 $(document).ready( function () {
-    $('.datatable').DataTable({
-        "pagingType": "full_numbers",
-        "language": {
-            "sProcessing":   "Подождите...",
-            "sLengthMenu":   "Показать _MENU_ записей",
-            "sZeroRecords":  "Записи отсутствуют.",
-            "sInfo":         "Записи с _START_ до _END_ из _TOTAL_ записей",
-            "sInfoEmpty":    "Записи с 0 до 0 из 0 записей",
-            "sInfoFiltered": "(отфильтровано из _MAX_ записей)",
-            "sInfoPostFix":  "",
-            "sSearch":       "Поиск:",
-            "sUrl":          "",
-            "oPaginate": {
-                "sFirst": "|<",
-                "sPrevious": "<<",
-                "sNext": ">>",
-                "sLast": ">|"
-            },
-            "oAria": {
-                "sSortAscending":  ": активировать для сортировки столбца по возрастанию",
-                "sSortDescending": ": активировать для сортировки столбцов по убыванию"
-            }
-        }
-    });
+    $('.datatable').DataTable(datatable_settings);
 } );
 
 /* Modal */
@@ -94,6 +81,7 @@ let Modal = {
             $modal.find('.modal-dialog').addClass(options.size);
         }
         $modal.find('.modal-content').html(response.output);
+        tinymce.init(tiny_settings);
         $modal.modal('show');
         if (options.shopAutocomplete) {
             Modal.shopAutocomplete(options.shopAutocompleteElem);
@@ -249,3 +237,33 @@ $('.type-edit').on('click', (e)=> {
         size: 'modal-sm'
     });
 });
+
+
+const tiny_settings = {
+    selector: "textarea.tinymce",
+    menubar : false,
+    plugins: ['advlist', 'code', 'link', 'lists', 'paste'],
+    toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | erratadate | code removeformat',
+    branding: false,
+    setup: (editor) => {
+        editor.ui.registry.addButton('erratadate', {
+            title : 'Дата эрраты',
+            text: '[Дата]',
+            onAction: () => {
+                editor.focus();
+                let today = new Date();
+                let dd = String(today.getDate()).padStart(2, '0');
+                let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                let yyyy = today.getFullYear();
+                editor.selection.setContent('[' + mm + '.' + dd + '.' + yyyy + '] ');
+            }
+        });
+        editor.ui.registry.addButton('myCustomToolbarButton', {
+            text: 'My Custom Button',
+            onAction: () => {
+                editor.focus();
+                editor.selection.setContent('<img src="/images/icon-asteroid.png">');
+            }
+        });
+    }
+};

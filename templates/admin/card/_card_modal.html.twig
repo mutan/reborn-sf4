@@ -94,23 +94,23 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-12 col-lg-6">
+        <div class="form-group col-12">
             {{ form_label(form.text, 'Текст') }}
-            {{ form_widget(form.text, {'attr': {'class': 'form-control-sm', 'rows': 4}}) }}
+            {{ form_widget(form.text, {'attr': {'class': 'form-control-sm tinymce', 'rows': 4}}) }}
         </div>
-        <div class="form-group col-md-12 col-lg-6">
+        <div class="form-group col-12">
             {{ form_label(form.flavor, 'Худ. текст') }}
-            {{ form_widget(form.flavor, {'attr': {'class': 'form-control-sm', 'rows': 4}}) }}
+            {{ form_widget(form.flavor, {'attr': {'class': 'form-control-sm tinymce', 'rows': 4}}) }}
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-12 col-lg-6">
+        <div class="form-group col-12">
             {{ form_label(form.erratas, 'Эрраты') }}
-            {{ form_widget(form.erratas, {'attr': {'class': 'form-control-sm', 'rows': 4}}) }}
+            {{ form_widget(form.erratas, {'attr': {'class': 'form-control-sm tinymce', 'rows': 4}}) }}
         </div>
-        <div class="form-group col-md-12 col-lg-6">
+        <div class="form-group col-12">
             {{ form_label(form.comments, 'Комментарии') }}
-            {{ form_widget(form.comments, {'attr': {'class': 'form-control-sm', 'rows': 4}}) }}
+            {{ form_widget(form.comments, {'attr': {'class': 'form-control-sm tinymce', 'rows': 4}}) }}
         </div>
     </div>
 </div>
