@@ -37,7 +37,7 @@ $(function () {
 /* Datatables */
 
 $(document).ready( function () {
-    $('.datatable').DataTable(datatable_settings);
+    $('.datatable').DataTable(datatable_config);
 } );
 
 /* Modal */
@@ -81,7 +81,7 @@ let Modal = {
             $modal.find('.modal-dialog').addClass(options.size);
         }
         $modal.find('.modal-content').html(response.output);
-        tinymce.init(tiny_settings);
+        tinymce.init(tiny_config);
         $modal.modal('show');
         if (options.shopAutocomplete) {
             Modal.shopAutocomplete(options.shopAutocompleteElem);
@@ -238,12 +238,12 @@ $('.type-edit').on('click', (e)=> {
     });
 });
 
-
-const tiny_settings = {
+/* TinyMCE config */
+const tiny_config = {
     selector: "textarea.tinymce",
     menubar : false,
     plugins: ['advlist', 'code', 'link', 'lists', 'paste'],
-    toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | erratadate | code removeformat',
+    toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | counter tap insttap | erratadate | code removeformat',
     branding: false,
     setup: (editor) => {
         editor.ui.registry.addButton('erratadate', {
@@ -258,12 +258,48 @@ const tiny_settings = {
                 editor.selection.setContent('[' + mm + '.' + dd + '.' + yyyy + '] ');
             }
         });
-        editor.ui.registry.addButton('myCustomToolbarButton', {
-            text: 'My Custom Button',
-            onAction: () => {
-                editor.focus();
-                editor.selection.setContent('<img src="/images/icon-asteroid.png">');
-            }
+
+        /* Чтобы не дублировать код */
+        const icon_buttons = [
+            {'name': 'counter', 'tooltip': 'Жетон', 'image': '<img src="/build/icons/counter-16x16.png">'},
+            {'name': 'tap', 'tooltip': 'Закрыть', 'image': '<img src="/build/icons/tap-16x16.png">'},
+            {'name': 'insttap', 'tooltip': 'Внезапное действие', 'image': '<img src="/build/icons/insttap-16x16.png">'}
+        ];
+        icon_buttons.forEach(function(item, index) {
+            editor.ui.registry.addButton(item.name, {
+                tooltip : item.tooltip,
+                text: item.image,
+                onAction: () => {
+                    editor.focus();
+                    editor.selection.setContent(item.image + ' ');
+                }
+            });
         });
     }
 };
+
+/* Datatables config */
+const datatable_config = {
+    "pagingType": "full_numbers",
+    "language": {
+    "sProcessing":   "Подождите...",
+        "sLengthMenu":   "Показать _MENU_ записей",
+        "sZeroRecords":  "Записи отсутствуют.",
+        "sInfo":         "Записи с _START_ до _END_ из _TOTAL_ записей",
+        "sInfoEmpty":    "Записи с 0 до 0 из 0 записей",
+        "sInfoFiltered": "(отфильтровано из _MAX_ записей)",
+        "sInfoPostFix":  "",
+        "sSearch":       "Поиск:",
+        "sUrl":          "",
+        "oPaginate": {
+        "sFirst": "|<",
+            "sPrevious": "<<",
+            "sNext": ">>",
+            "sLast": ">|"
+    },
+    "oAria": {
+        "sSortAscending":  ": активировать для сортировки столбца по возрастанию",
+            "sSortDescending": ": активировать для сортировки столбцов по убыванию"
+    }
+}
+}
