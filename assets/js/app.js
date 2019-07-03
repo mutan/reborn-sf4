@@ -36,9 +36,9 @@ $(function () {
 
 /* Datatables */
 
-$(document).ready( function () {
+$(document).ready(function () {
     $('.datatable').DataTable(datatable_config);
-} );
+});
 
 /* Modal */
 
@@ -282,7 +282,7 @@ const tiny_config = {
 const datatable_config = {
     "pagingType": "full_numbers",
     "language": {
-    "sProcessing":   "Подождите...",
+        "sProcessing":   "Подождите...",
         "sLengthMenu":   "Показать _MENU_ записей",
         "sZeroRecords":  "Записи отсутствуют.",
         "sInfo":         "Записи с _START_ до _END_ из _TOTAL_ записей",
@@ -292,14 +292,14 @@ const datatable_config = {
         "sSearch":       "Поиск:",
         "sUrl":          "",
         "oPaginate": {
-        "sFirst": "|<",
+            "sFirst": "|<",
             "sPrevious": "<<",
             "sNext": ">>",
             "sLast": ">|"
-    },
-    "oAria": {
-        "sSortAscending":  ": активировать для сортировки столбца по возрастанию",
+        },
+        "oAria": {
+            "sSortAscending":  ": активировать для сортировки столбца по возрастанию",
             "sSortDescending": ": активировать для сортировки столбцов по убыванию"
+        }
     }
-}
-}
+};
