@@ -3,17 +3,14 @@ html, body {
   font-size: 14px;
   //font-family: Ubuntu, sans-serif;
 }
-
 .pointer {
   cursor: pointer;
 }
-
 .btn {
   border-radius: 0;
 }
 
 /* Navbar */
-
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -34,7 +31,6 @@ html, body {
 }
 
 /* Header */
-
 #header {
   margin-bottom: 1rem;
   background: #333333;
@@ -64,7 +60,25 @@ html, body {
 }
 
 
-
-
-
-
+/* Bootstrap popover */
+.popover {
+  max-width: 300px;
+  border: 0;
+  background-color: transparent;
+  .arrow {
+    visibility: hidden;
+  }
+}
+.popover-body {
+  padding: 0.2rem;
+}
+.img-image-popover {
+  cursor: pointer;
+}
+.text-image-popover {
+  cursor: pointer;
+  color: #0c73cd;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #0c73cd;
+}

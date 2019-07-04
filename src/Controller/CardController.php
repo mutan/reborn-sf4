@@ -92,7 +92,7 @@ class CardController extends BaseController
             $this->getEm()->remove($card);
             $this->getEm()->flush();
             $this->getCache()->deleteItem(CardService::CACHE_KEY_CARD_COUNT);
-            $this->addFlash('success','Карта удален');
+            $this->addFlash('success','Карта удалена');
         }
 
         return $this->redirectToRoute('card_index');

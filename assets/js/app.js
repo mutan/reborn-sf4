@@ -35,7 +35,14 @@ $(function () {
 
 /* Bootstrap Popover Initialization */
 $(function () {
-    $('[data-toggle="popover"]').popover()
+    $('[data-toggle="image-popover"]').popover({
+        trigger: 'hover',
+        placement: 'right',
+        html: true,
+        boundary: 'window',
+        fallbackPlacement: 'clockwise',
+        container: 'body',
+    })
 });
 
 /* Datatables */
