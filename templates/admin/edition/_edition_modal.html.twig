@@ -45,6 +45,6 @@
 </div>
 <!--Footer-->
 <div class="modal-footer">
-    <button class="btn btn-sm btn-default" type="submit" formnovalidate>{{ button_label|default('Сохранить') }}</button>
+    {{ include('admin/layout/_save_button.html.twig') }}
 </div>
 {{ form_end(form, {'render_rest': false}) }}
