@@ -248,7 +248,7 @@ const tiny_config = {
     setup: (editor) => {
         editor.ui.registry.addButton('erratadate', {
             title : 'Дата эрраты',
-            text: '[Дата]',
+            icon: 'insert-time',
             onAction: () => {
                 editor.focus();
                 let today = new Date();
