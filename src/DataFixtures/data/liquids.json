@@ -1,9 +1,9 @@
 [
-  { "id": 1, "name": "Водная", "image": "water-liquid.png" },
-  { "id": 2, "name": "Воздушная", "image": "air-liquid.png" },
-  { "id": 3, "name": "Земляная", "image": "earth-liquid.png" },
-  { "id": 4, "name": "Огненная", "image": "fire-liquid.png" },
-  { "id": 5, "name": "Светлая", "image": "light-liquid.png" },
-  { "id": 6, "name": "Темная", "image": "dark-liquid.png" },
-  { "id": 7, "name": "Нейтральная", "image": "neuteral-liquid.png" }
+  { "id": 1, "name": "Водная", "image": "liquid-water.png" },
+  { "id": 2, "name": "Воздушная", "image": "liquid-air.png" },
+  { "id": 3, "name": "Земляная", "image": "liquid-earth.png" },
+  { "id": 4, "name": "Огненная", "image": "liquid-fire.png" },
+  { "id": 5, "name": "Светлая", "image": "liquid-light.png" },
+  { "id": 6, "name": "Темная", "image": "liquid-dark.png" },
+  { "id": 7, "name": "Нейтральная", "image": "liquid-neuteral.png" }
 ]

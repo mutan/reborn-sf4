@@ -29,28 +29,23 @@ require('tinymce/plugins/lists');
 /* CUSTOM JS */
 
 /* Bootstrap Tooltips Initialization */
-
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
 /* Datatables */
-
 $(document).ready(function () {
     $('.datatable').DataTable(datatable_config);
 });
 
 /* Modal */
-
 let Modal = {
     getModal: function() {
         return $('#mainModal');
     },
-
     toggleButtonSpinnerIcon: function(e) {
         $(e.currentTarget).find('i').toggleClass('fa-spinner fa-spin');
     },
-
     /* JQuery автодополнение */
     /* http://api.jqueryui.com/autocomplete/ */
     /*shopAutocomplete: function(id) {
@@ -63,7 +58,6 @@ let Modal = {
             }
         });
     },*/
-
     handleMainModal: function(e, options) {
         e.preventDefault();
         $.ajax({
@@ -75,7 +69,6 @@ let Modal = {
             Modal.reload(Modal.getModal(), response, options);
         });
     },
-
     reload: function($modal, response, options) {
         if (options.size) {
             $modal.find('.modal-dialog').addClass(options.size);
@@ -243,11 +236,11 @@ const tiny_config = {
     selector: "textarea.tinymce",
     menubar : false,
     plugins: ['advlist', 'code', 'link', 'lists', 'paste'],
-    toolbar: 'undo redo | bold italic underline strikethrough subscript superscript | alignleft aligncenter alignright alignjustify | bullist numlist | counter tap insttap | erratadate | code removeformat',
+    toolbar: 'undo redo | bold italic | alignleft aligncenter alignjustify | bullist numlist | counter tap insttap | erratadate | code removeformat',
     branding: false,
     setup: (editor) => {
         editor.ui.registry.addButton('erratadate', {
-            title : 'Дата эрраты',
+            title: 'Дата эрраты',
             icon: 'insert-time',
             onAction: () => {
                 editor.focus();

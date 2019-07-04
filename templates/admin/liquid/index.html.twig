@@ -19,7 +19,7 @@
     <table class="table table-hover datatable">
         <thead>
             <tr>
-                <th width="1%">Id</th>
+                <th width="1%"><i class="fas fa-file-image"></i></th>
                 <th>Название</th>
                 <th>Изображение</th>
                 <th width="1%">Действия</th>
@@ -28,7 +28,7 @@
         <tbody>
         {% for liquid in liquids %}
             <tr>
-                <td>{{ liquid.id }}</td>
+                <td><img src="{{ asset('build/icons/' ~ liquid.image) }}" class="" alt="{{ liquid.name }}"></td>
                 <td>{{ liquid.name }}</td>
                 <td>{{ liquid.image }}</td>
                 <td>

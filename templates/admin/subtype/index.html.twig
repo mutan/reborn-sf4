@@ -19,7 +19,6 @@
     <table class="table table-hover datatable">
         <thead>
             <tr>
-                <th width="1%">Id</th>
                 <th>Название</th>
                 <th width="1%">Действия</th>
             </tr>
@@ -27,7 +26,6 @@
         <tbody>
         {% for subtype in subtypes %}
             <tr>
-                <td>{{ subtype.id }}</td>
                 <td>{{ subtype.name }}</td>
                 <td>
                     <a class="btn btn-sm btn-danger subtype-edit" href="{{ path('subtype_edit', {'id': subtype.id}) }}" data-subtype-id="{{ subtype.id }}">

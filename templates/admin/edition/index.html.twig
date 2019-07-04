@@ -21,6 +21,7 @@
             <tr>
                 <th width="1%">Номер</th>
                 <th>Код</th>
+                <th><i class="fas fa-file-image"></i></th>
                 <th>Название</th>
                 <th>Изображение</th>
                 <th>Кол-во карт</th>
@@ -32,6 +33,7 @@
             <tr>
                 <td>{{ edition.number }}</td>
                 <td>{{ edition.code }}</td>
+                <td><img src="{{ asset('build/icons/' ~ edition.image) }}" class="" alt=""></td>
                 <td>{{ edition.name }}</td>
                 <td>{{ edition.image }}</td>
                 <td>{{ edition.quantity }}</td>
@@ -44,7 +46,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td colspan="4" width="20%"><strong>Краткое описание:</strong> {{ edition.description }}</td>
+                <td colspan="5" width="20%"><strong>Краткое описание:</strong> {{ edition.description }}</td>
                 <td></td>
             </tr>
         {% else %}
