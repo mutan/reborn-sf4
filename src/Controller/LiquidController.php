@@ -20,10 +20,11 @@ class LiquidController extends BaseController
     /**
      * @Route("/", name="liquid_index", methods={"GET"})
      */
-    public function index(LiquidRepository $liquidRepository): Response
+    public function index(LiquidRepository $liquidRepository, CardService $cardService): Response
     {
         return $this->render('admin/liquid/index.html.twig', [
             'liquids' => $liquidRepository->findAll(),
+            'cardService' => $cardService,
         ]);
     }
 

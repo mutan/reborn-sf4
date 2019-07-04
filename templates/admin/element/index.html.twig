@@ -28,7 +28,7 @@
         <tbody>
         {% for element in elements %}
             <tr>
-                <td><img src="{{ asset('build/icons/' ~ element.image) }}" class="" alt="{{ element.name }}"></td>
+                <td><img src="{{ asset(cardService.iconDir ~ element.image) }}" class="" alt="img"></td>
                 <td>{{ element.name }}</td>
                 <td>{{ element.image }}</td>
                 <td>

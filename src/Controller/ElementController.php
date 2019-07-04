@@ -20,10 +20,11 @@ class ElementController extends BaseController
     /**
      * @Route("/", name="element_index", methods={"GET"})
      */
-    public function index(ElementRepository $elementRepository): Response
+    public function index(ElementRepository $elementRepository, CardService $cardService): Response
     {
         return $this->render('admin/element/index.html.twig', [
             'elements' => $elementRepository->findAll(),
+            'cardService' => $cardService,
         ]);
     }
 

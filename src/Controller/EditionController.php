@@ -20,10 +20,11 @@ class EditionController extends BaseController
     /**
      * @Route("/", name="edition_index", methods={"GET"})
      */
-    public function index(EditionRepository $editionRepository): Response
+    public function index(EditionRepository $editionRepository, CardService $cardService): Response
     {
         return $this->render('admin/edition/index.html.twig', [
             'editions' => $editionRepository->findAllOrderedByNumber(),
+            'cardService' => $cardService,
         ]);
     }
 

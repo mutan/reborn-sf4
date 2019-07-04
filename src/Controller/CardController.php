@@ -20,10 +20,11 @@ class CardController extends BaseController
     /**
      * @Route("/", name="card_index", methods={"GET"})
      */
-    public function index(CardRepository $cardRepository): Response
+    public function index(CardRepository $cardRepository, CardService $cardService): Response
     {
         return $this->render('admin/card/index.html.twig', [
             'cards' => $cardRepository->findAll(),
+            'cardService' => $cardService,
         ]);
     }
 

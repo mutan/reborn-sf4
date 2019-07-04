@@ -33,7 +33,7 @@
             <tr>
                 <td>{{ edition.number }}</td>
                 <td>{{ edition.code }}</td>
-                <td><img src="{{ asset('build/icons/' ~ edition.image) }}" class="" alt=""></td>
+                <td><img src="{{ asset(cardService.iconDir ~ edition.image) }}" class="" alt="img"></td>
                 <td>{{ edition.name }}</td>
                 <td>{{ edition.image }}</td>
                 <td>{{ edition.quantity }}</td>

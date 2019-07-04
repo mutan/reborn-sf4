@@ -28,7 +28,7 @@
         <tbody>
         {% for rarity in rarities %}
             <tr>
-                <td><img src="{{ asset('build/icons/' ~ rarity.image) }}" class="" alt="{{ rarity.name }}"></td>
+                <td><img src="{{ asset(cardService.iconDir ~ rarity.image) }}" class="" alt="img"></td>
                 <td>{{ rarity.name }}</td>
                 <td>{{ rarity.image }}</td>
                 <td>

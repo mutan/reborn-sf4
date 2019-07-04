@@ -33,6 +33,11 @@ $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 });
 
+/* Bootstrap Popover Initialization */
+$(function () {
+    $('[data-toggle="popover"]').popover()
+});
+
 /* Datatables */
 $(document).ready(function () {
     $('.datatable').DataTable(datatable_config);

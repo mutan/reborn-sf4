@@ -19,20 +19,21 @@
     <table class="table table-hover table-responsive datatable">
         <thead>
             <tr>
-                <th width="1%"><i class="fas fa-file-image"></i></th>
+                <th width="2%"><i class="fas fa-file-image"></i></th>
                 <th width="1%">Номер</th>
                 <th>Название</th>
-                <th>Изображение</th>
+                <th>Редкость</th>
                 <th width="1%">Действия</th>
             </tr>
         </thead>
         <tbody>
         {% for card in cards %}
             <tr>
-                <td><img src="{{ asset('build/images/' ~ card.image) }}" class="" alt="{{ card.name }}"></td>
+                <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid" alt="img" data-toggle="popover" data-content="<img src='{{ cardService.imageDir ~ card.image }}"></td>
+
                 <td>{{ card.number }}</td>
                 <td>{{ card.name }}</td>
-                <td>{{ card.image }}</td>
+                <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt="img"></td>
                 <td>
                     <a class="btn btn-sm btn-danger card-edit" href="{{ path('card_edit', {'id': card.id}) }}" data-card-id="{{ card.id }}">
                         <i class="fas fa-edit"></i>

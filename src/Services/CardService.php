@@ -12,7 +12,9 @@ use App\Repository\RarityRepository;
 use App\Repository\SubtypeRepository;
 use App\Repository\SupertypeRepository;
 use App\Repository\TypeRepository;
+use Exception;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CardService
 {
@@ -36,6 +38,7 @@ class CardService
     private $subtypeRepository;
     private $supertypeRepository;
     private $typeRepository;
+    private $parameterBag;
 
     public function __construct(
         AdapterInterface $cache,
@@ -47,7 +50,8 @@ class CardService
         RarityRepository $rarityRepository,
         SubtypeRepository $subtypeRepository,
         SupertypeRepository $supertypeRepository,
-        TypeRepository $typeRepository
+        TypeRepository $typeRepository,
+        ParameterBagInterface $parameterBag
     )
     {
         $this->cache = $cache;
@@ -60,6 +64,7 @@ class CardService
         $this->subtypeRepository = $subtypeRepository;
         $this->supertypeRepository = $supertypeRepository;
         $this->typeRepository = $typeRepository;
+        $this->parameterBag = $parameterBag;
     }
 
     public function getCardCount()
@@ -115,5 +120,34 @@ class CardService
             $this->cache->save($item);
         }
         return $item->get();
+    }
+
+    /**
+     * Конвертирует строку из константы DATA_PATH в валидный путь для текущей ОС
+     * @param string $path
+     * @return string
+     * @throws Exception
+     */
+    public function getSanitizedPath(string $path): string
+    {
+        $pieces = array_filter(explode('/', $path));
+        $path = $this->parameterBag->get('kernel.project_dir') . DIRECTORY_SEPARATOR .
+            implode(DIRECTORY_SEPARATOR, $pieces) . DIRECTORY_SEPARATOR;
+        if (!file_exists($path)) {
+            if (!mkdir($path, 0755, true)) {
+                throw new Exception('Expired passports: cannot create data directory.');
+            }
+        }
+        return $path;
+    }
+
+    public function getImageDir(): string
+    {
+        return '/images/';
+    }
+
+    public function getIconDir(): string
+    {
+        return '/icons/';
     }
 }

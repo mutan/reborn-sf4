@@ -20,10 +20,11 @@ class RarityController extends BaseController
     /**
      * @Route("/", name="rarity_index", methods={"GET"})
      */
-    public function index(RarityRepository $rarityRepository): Response
+    public function index(RarityRepository $rarityRepository, CardService $cardService): Response
     {
         return $this->render('admin/rarity/index.html.twig', [
             'rarities' => $rarityRepository->findAll(),
+            'cardService' => $cardService,
         ]);
     }
 
