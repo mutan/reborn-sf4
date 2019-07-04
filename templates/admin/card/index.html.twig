@@ -30,9 +30,6 @@
         {% for card in cards %}
             <tr>
                 <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid image-popover" alt="img" data-toggle="image-popover" data-content="<img src='{{ asset(cardService.imageDir ~ card.image) }}' class='img-fluid' alt='img'>"></td>
-
-
-
                 <td>{{ card.number }}</td>
                 <td>{{ card.name }}</td>
                 <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt="img"></td>
