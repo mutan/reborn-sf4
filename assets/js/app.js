@@ -266,14 +266,14 @@ const tiny_config = {
 
         /* Чтобы не дублировать код */
         const icon_buttons = [
-            {'name': 'counter', 'tooltip': 'Жетон', 'image': '<img src="/icons/counter-16x16.png">'},
-            {'name': 'tap', 'tooltip': 'Закрыть', 'image': '<img src="/icons/tap-16x16.png">'},
-            {'name': 'insttap', 'tooltip': 'Внезапное действие', 'image': '<img src="/icons/insttap-16x16.png">'}
+            {'name': 'counter', 'tooltip': 'Жетон', 'image': 'counter-16x16.png'},
+            {'name': 'tap', 'tooltip': 'Закрыть', 'image': 'tap-16x16.png'},
+            {'name': 'insttap', 'tooltip': 'Внезапное действие', 'image': 'insttap-16x16.png'}
         ];
         icon_buttons.forEach(function(item, index) {
             editor.ui.registry.addButton(item.name, {
                 tooltip : item.tooltip,
-                text: item.image,
+                text: '<img src="/icons/' + item.image + '">',
                 onAction: () => {
                     editor.focus();
                     editor.selection.setContent(item.image + ' ');
