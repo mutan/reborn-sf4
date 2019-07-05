@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="supertype-new" class="btn btn-outline-light" type="button">
+            <button id="supertype_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -28,10 +28,8 @@
             <tr>
                 <td>{{ supertype.name }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger supertype-edit" href="{{ path('supertype_edit', {'id': supertype.id}) }}" data-supertype-id="{{ supertype.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/supertype/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'supertype_edit', 'id': supertype.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'supertype_delete', 'id': supertype.id}) }}
                 </td>
             </tr>
         {% else %}

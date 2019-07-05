@@ -34,8 +34,8 @@
                 <td>{{ card.name }}</td>
                 <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt="img"></td>
                 <td>
-                    {{ include('admin/layout/_edit_button.html.twig', { 'route': 'card_edit', 'id': card.id}) }}
-                    {{ include('admin/card/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'card_edit', 'id': card.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'card_delete', 'id': card.id}) }}
                 </td>
             </tr>
         {% else %}

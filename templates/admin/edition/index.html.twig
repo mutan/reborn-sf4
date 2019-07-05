@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="edition-new" class="btn btn-outline-light" type="button">
+            <button id="edition_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -38,10 +38,8 @@
                 <td>{{ edition.image }}</td>
                 <td>{{ edition.quantity }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger edition-edit" href="{{ path('edition_edit', {'id': edition.id}) }}" data-edition-id="{{ edition.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/edition/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'edition_edit', 'id': edition.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'edition_delete', 'id': edition.id}) }}
                 </td>
             </tr>
             <tr>

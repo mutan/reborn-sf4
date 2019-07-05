@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="rarity-new" class="btn btn-outline-light" type="button">
+            <button id="rarity_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -32,10 +32,8 @@
                 <td>{{ rarity.name }}</td>
                 <td>{{ rarity.image }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger rarity-edit" href="{{ path('rarity_edit', {'id': rarity.id}) }}" data-rarity-id="{{ rarity.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/rarity/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'rarity_edit', 'id': rarity.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'rarity_delete', 'id': rarity.id}) }}
                 </td>
             </tr>
         {% else %}

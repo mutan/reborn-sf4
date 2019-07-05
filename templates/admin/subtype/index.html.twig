@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="subtype-new" class="btn btn-outline-light" type="button">
+            <button id="subtype_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -28,10 +28,8 @@
             <tr>
                 <td>{{ subtype.name }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger subtype-edit" href="{{ path('subtype_edit', {'id': subtype.id}) }}" data-subtype-id="{{ subtype.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/subtype/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'subtype_edit', 'id': subtype.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'subtype_delete', 'id': subtype.id}) }}
                 </td>
             </tr>
         {% else %}

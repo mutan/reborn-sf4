@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="liquid-new" class="btn btn-outline-light" type="button">
+            <button id="liquid_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -32,10 +32,8 @@
                 <td>{{ liquid.name }}</td>
                 <td>{{ liquid.image }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger liquid-edit" href="{{ path('liquid_edit', {'id': liquid.id}) }}" data-liquid-id="{{ liquid.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/liquid/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'liquid_edit', 'id': liquid.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'liquid_delete', 'id': liquid.id}) }}
                 </td>
             </tr>
         {% else %}

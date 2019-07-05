@@ -1,3 +1,4 @@
-<a class="btn btn-sm btn-default card-edit" href="{{ path(route, {'id': id}) }}" data-card-id="{{ id }}">
+{# Первое употребление route (в качестве класса) нужен, чтобы повесить jQuery-event #}
+<a class="btn btn-sm btn-default {{ route }}" href="{{ path(route, {'id': id}) }}" data-id="{{ id }}">
     <i class="fas fa-edit"></i>
 </a>

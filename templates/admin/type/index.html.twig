@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-2 d-flex align-items-center justify-content-end">
         <div class="dropdown create">
-            <button id="type-new" class="btn btn-outline-light" type="button">
+            <button id="type_new" class="btn btn-outline-light" type="button">
                 <i class="fas fa-plus"></i> Добавить
             </button>
         </div>
@@ -28,10 +28,8 @@
             <tr>
                 <td>{{ type.name }}</td>
                 <td>
-                    <a class="btn btn-sm btn-danger type-edit" href="{{ path('type_edit', {'id': type.id}) }}" data-type-id="{{ type.id }}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    {{ include('admin/type/_delete_form.html.twig') }}
+                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'type_edit', 'id': type.id}) }}
+                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'type_delete', 'id': type.id}) }}
                 </td>
             </tr>
         {% else %}

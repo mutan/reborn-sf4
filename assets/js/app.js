@@ -110,14 +110,14 @@ let Modal = {
     }
 };
 
-$('#card-new').on('click', (e)=> {
+$('#card_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/card/new`,
         size: 'modal-lg'
     });
 });
 
-$('.card-edit').on('click', (e)=> {
+$('.card_edit').on('click', (e)=> {
     let cardId = $(e.currentTarget).attr('data-card-id');
     Modal.handleMainModal(e, {
         url: `/admin/card/${cardId}/edit`,
@@ -125,118 +125,118 @@ $('.card-edit').on('click', (e)=> {
     });
 });
 
-$('#artist-new').on('click', (e)=> {
+$('#artist_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/artist/new`,
         size: 'modal-sm'
     });
 });
 
-$('.artist-edit').on('click', (e)=> {
-    let artistId = $(e.currentTarget).attr('data-artist-id');
+$('.artist_edit').on('click', (e)=> {
+    let artistId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/artist/${artistId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#edition-new').on('click', (e)=> {
+$('#edition_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/edition/new`
     });
 });
 
-$('.edition-edit').on('click', (e)=> {
-    let editionId = $(e.currentTarget).attr('data-edition-id');
+$('.edition_edit').on('click', (e)=> {
+    let editionId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/edition/${editionId}/edit`
     });
 });
 
-$('#element-new').on('click', (e)=> {
+$('#element_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/element/new`,
         size: 'modal-sm'
     });
 });
 
-$('.element-edit').on('click', (e)=> {
-    let elementId = $(e.currentTarget).attr('data-element-id');
+$('.element_edit').on('click', (e)=> {
+    let elementId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/element/${elementId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#liquid-new').on('click', (e)=> {
+$('#liquid_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/liquid/new`,
         size: 'modal-sm'
     });
 });
 
-$('.liquid-edit').on('click', (e)=> {
-    let liquidId = $(e.currentTarget).attr('data-liquid-id');
+$('.liquid_edit').on('click', (e)=> {
+    let liquidId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/liquid/${liquidId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#rarity-new').on('click', (e)=> {
+$('#rarity_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/rarity/new`,
         size: 'modal-sm'
     });
 });
 
-$('.rarity-edit').on('click', (e)=> {
-    let rarityId = $(e.currentTarget).attr('data-rarity-id');
+$('.rarity_edit').on('click', (e)=> {
+    let rarityId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/rarity/${rarityId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#subtype-new').on('click', (e)=> {
+$('#subtype_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/subtype/new`,
         size: 'modal-sm'
     });
 });
 
-$('.subtype-edit').on('click', (e)=> {
-    let subtypeId = $(e.currentTarget).attr('data-subtype-id');
+$('.subtype_edit').on('click', (e)=> {
+    let subtypeId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/subtype/${subtypeId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#supertype-new').on('click', (e)=> {
+$('#supertype_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/supertype/new`,
         size: 'modal-sm'
     });
 });
 
-$('.supertype-edit').on('click', (e)=> {
-    let supertypeId = $(e.currentTarget).attr('data-supertype-id');
+$('.supertype_edit').on('click', (e)=> {
+    let supertypeId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/supertype/${supertypeId}/edit`,
         size: 'modal-sm'
     });
 });
 
-$('#type-new').on('click', (e)=> {
+$('#type_new').on('click', (e)=> {
     Modal.handleMainModal(e, {
         url: `/admin/type/new`,
         size: 'modal-sm'
     });
 });
 
-$('.type-edit').on('click', (e)=> {
-    let typeId = $(e.currentTarget).attr('data-type-id');
+$('.type_edit').on('click', (e)=> {
+    let typeId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/type/${typeId}/edit`,
         size: 'modal-sm'
