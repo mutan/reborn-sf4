@@ -16,13 +16,11 @@ html, body {
   padding-bottom: 0;
 }
 .navbar-brand {
-  margin-top: -3px;
+  //margin-top: -3px;
   padding-top: 0;
   padding-bottom: 0;
 }
 .nav-link {
-  padding-top: 4px;
-  padding-bottom: 4px;
   border-radius: 0 !important;
 }
 .dropdown-menu {
@@ -50,6 +48,7 @@ html, body {
 }
 
 .list-group-item {
+  padding: 4px 1rem;
   border-radius: 0 !important;
 }
 .list-group-item.active {

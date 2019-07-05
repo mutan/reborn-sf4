@@ -1,5 +1,0 @@
-<form class="d-inline" method="post" action="{{ path('card_delete', {'id': card.id}) }}" onsubmit="return confirm('Точно удалить?');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ card.id) }}">
-    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-</form>
