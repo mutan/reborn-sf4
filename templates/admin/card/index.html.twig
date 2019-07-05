@@ -3,19 +3,24 @@
 {% block title %}Карты{% endblock %}
 
 {% block header %}
-    <div class="col-md-10 d-flex align-items-center justify-content-start">
-        <h1><i class="fas fa-cogs"></i> Карты <small class="d-none d-lg-inline text-secondary"></small></h1>
-    </div>
-    <div class="col-md-2 d-flex align-items-center justify-content-end">
-        <div class="dropdown create">
-            <button id="card-new" class="btn btn-outline-light" type="button">
-                <i class="fas fa-plus"></i> Добавить
-            </button>
-        </div>
-    </div>
+
 {% endblock %}
 
 {% block body %}
+    <div class="row mb-3">
+        <div class="col-md-10 d-flex align-items-center justify-content-start">
+            <h1><i class="fas fa-cogs"></i> Карты <small class="d-none d-lg-inline text-secondary"></small></h1>
+            <hr>
+        </div>
+        <div class="col-md-2 d-flex align-items-center justify-content-end">
+            <div class="dropdown create">
+                <button id="card_new" class="btn btn-sm btn-default" type="button">
+                    <i class="fas fa-plus"></i> Добавить
+                </button>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-hover table-responsive datatable">
         <thead>
             <tr>
@@ -29,10 +34,10 @@
         <tbody>
         {% for card in cards %}
             <tr>
-                <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid image-popover" alt="img" data-toggle="image-popover" data-content="<img src='{{ asset(cardService.imageDir ~ card.image) }}' class='img-fluid' alt='img'>"></td>
+                <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid img-image-popover" alt="img" data-toggle="image-popover" data-content="<img src='{{ asset(cardService.imageDir ~ card.image) }}' class='img-fluid'>"></td>
                 <td>{{ card.number }}</td>
                 <td>{{ card.name }}</td>
-                <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt="img"></td>
+                <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt=""></td>
                 <td>
                     {{ include('admin/layout/_edit_button.html.twig', {'route': 'card_edit', 'id': card.id}) }}
                     {{ include('admin/layout/_delete_button.html.twig', {'route': 'card_delete', 'id': card.id}) }}

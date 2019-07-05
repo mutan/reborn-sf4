@@ -118,7 +118,7 @@ $('#card_new').on('click', (e)=> {
 });
 
 $('.card_edit').on('click', (e)=> {
-    let cardId = $(e.currentTarget).attr('data-card-id');
+    let cardId = $(e.currentTarget).attr('data-id');
     Modal.handleMainModal(e, {
         url: `/admin/card/${cardId}/edit`,
         size: 'modal-lg'
