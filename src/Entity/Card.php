@@ -73,7 +73,6 @@ class Card
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Liquid", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $liquids;
 
@@ -85,7 +84,6 @@ class Card
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Element", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $elements;
 
@@ -108,19 +106,16 @@ class Card
 
      /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Supertype", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $supertypes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Type", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $types;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Subtype", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $subtypes;
 
@@ -136,7 +131,6 @@ class Card
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="cards")
-     * @Assert\NotBlank(message="~not_blank")
      */
     private $artists;
 

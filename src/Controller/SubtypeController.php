@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Subtype;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\SubtypeType;
 use App\Repository\SubtypeRepository;
 use App\Services\CardService;
@@ -19,6 +20,8 @@ class SubtypeController extends BaseController
 {
     /**
      * @Route("/", name="subtype_index", methods={"GET"})
+     * @param SubtypeRepository $subtypeRepository
+     * @return Response
      */
     public function index(SubtypeRepository $subtypeRepository): Response
     {
@@ -59,6 +62,9 @@ class SubtypeController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="subtype_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Subtype $subtype
+     * @return JsonResponse
      */
     public function edit(Request $request, Subtype $subtype): JsonResponse
     {
@@ -84,14 +90,25 @@ class SubtypeController extends BaseController
 
     /**
      * @Route("/{id}", name="subtype_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Subtype $subtype
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Subtype $subtype): Response
     {
         if ($this->isCsrfTokenValid('delete' . $subtype->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($subtype);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_SUBTYPE_COUNT);
-            $this->addFlash('success','Подтип удален');
+            try {
+                $this->getEm()->remove($subtype);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_SUBTYPE_COUNT);
+                $this->addFlash('success','Подтип удален');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие подтип \"{$subtype->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('subtype_index');

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Supertype;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\SupertypeType;
 use App\Repository\SupertypeRepository;
 use App\Services\CardService;
@@ -19,6 +20,8 @@ class SupertypeController extends BaseController
 {
     /**
      * @Route("/", name="supertype_index", methods={"GET"})
+     * @param SupertypeRepository $supertypeRepository
+     * @return Response
      */
     public function index(SupertypeRepository $supertypeRepository): Response
     {
@@ -59,6 +62,9 @@ class SupertypeController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="supertype_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Supertype $supertype
+     * @return JsonResponse
      */
     public function edit(Request $request, Supertype $supertype): JsonResponse
     {
@@ -84,14 +90,25 @@ class SupertypeController extends BaseController
 
     /**
      * @Route("/{id}", name="supertype_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Supertype $supertype
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Supertype $supertype): Response
     {
         if ($this->isCsrfTokenValid('delete' . $supertype->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($supertype);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
-            $this->addFlash('success','Супертип удален');
+            try {
+                $this->getEm()->remove($supertype);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_SUPERTYPE_COUNT);
+                $this->addFlash('success','Супертип удален');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие супертип \"{$supertype->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('supertype_index');

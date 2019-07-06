@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artist;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\ArtistType;
 use App\Repository\ArtistRepository;
 use App\Services\CardService;
@@ -19,6 +20,8 @@ class ArtistController extends BaseController
 {
     /**
      * @Route("/", name="artist_index", methods={"GET"})
+     * @param ArtistRepository $artistRepository
+     * @return Response
      */
     public function index(ArtistRepository $artistRepository): Response
     {
@@ -59,6 +62,9 @@ class ArtistController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="artist_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Artist $artist
+     * @return JsonResponse
      */
     public function edit(Request $request, Artist $artist): JsonResponse
     {
@@ -84,14 +90,25 @@ class ArtistController extends BaseController
 
     /**
      * @Route("/{id}", name="artist_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Artist $artist
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Artist $artist): Response
     {
         if ($this->isCsrfTokenValid('delete' . $artist->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($artist);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
-            $this->addFlash('success','Художник удален');
+            try {
+                $this->getEm()->remove($artist);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
+                $this->addFlash('success','Художник удален');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие художника \"{$artist->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('artist_index');

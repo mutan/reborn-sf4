@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Liquid;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\LiquidType;
 use App\Repository\LiquidRepository;
 use App\Services\CardService;
@@ -19,6 +20,9 @@ class LiquidController extends BaseController
 {
     /**
      * @Route("/", name="liquid_index", methods={"GET"})
+     * @param LiquidRepository $liquidRepository
+     * @param CardService $cardService
+     * @return Response
      */
     public function index(LiquidRepository $liquidRepository, CardService $cardService): Response
     {
@@ -60,6 +64,9 @@ class LiquidController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="liquid_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Liquid $liquid
+     * @return JsonResponse
      */
     public function edit(Request $request, Liquid $liquid): JsonResponse
     {
@@ -85,14 +92,25 @@ class LiquidController extends BaseController
 
     /**
      * @Route("/{id}", name="liquid_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Liquid $liquid
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Liquid $liquid): Response
     {
         if ($this->isCsrfTokenValid('delete' . $liquid->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($liquid);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
-            $this->addFlash('success','Стихия удалена');
+            try {
+                $this->getEm()->remove($liquid);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_LIQUID_COUNT);
+                $this->addFlash('success','Стихия удалена');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие жидкость \"{$liquid->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('liquid_index');

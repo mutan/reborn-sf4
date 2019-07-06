@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Element;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\ElementType;
 use App\Repository\ElementRepository;
 use App\Services\CardService;
@@ -19,6 +20,9 @@ class ElementController extends BaseController
 {
     /**
      * @Route("/", name="element_index", methods={"GET"})
+     * @param ElementRepository $elementRepository
+     * @param CardService $cardService
+     * @return Response
      */
     public function index(ElementRepository $elementRepository, CardService $cardService): Response
     {
@@ -60,6 +64,9 @@ class ElementController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="element_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Element $element
+     * @return JsonResponse
      */
     public function edit(Request $request, Element $element): JsonResponse
     {
@@ -85,14 +92,25 @@ class ElementController extends BaseController
 
     /**
      * @Route("/{id}", name="element_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Element $element
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Element $element): Response
     {
         if ($this->isCsrfTokenValid('delete' . $element->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($element);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
-            $this->addFlash('success','Стихия удалена');
+            try {
+                $this->getEm()->remove($element);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
+                $this->addFlash('success','Стихия удалена');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие стихия \"{$element->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('element_index');

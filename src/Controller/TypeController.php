@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Type;
+use App\Exceptions\EmptyManyToManyRelationException;
 use App\Form\TypeType;
 use App\Repository\TypeRepository;
 use App\Services\CardService;
@@ -19,6 +20,8 @@ class TypeController extends BaseController
 {
     /**
      * @Route("/", name="type_index", methods={"GET"})
+     * @param TypeRepository $typeRepository
+     * @return Response
      */
     public function index(TypeRepository $typeRepository): Response
     {
@@ -59,6 +62,9 @@ class TypeController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="type_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Type $type
+     * @return JsonResponse
      */
     public function edit(Request $request, Type $type): JsonResponse
     {
@@ -84,14 +90,25 @@ class TypeController extends BaseController
 
     /**
      * @Route("/{id}", name="type_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Type $type
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Type $type): Response
     {
         if ($this->isCsrfTokenValid('delete' . $type->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($type);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
-            $this->addFlash('success','Тип удален');
+            try {
+                $this->getEm()->remove($type);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_TYPE_COUNT);
+                $this->addFlash('success','Тип удален');
+            } catch (EmptyManyToManyRelationException $e) {
+                $this->addFlash(
+                    'danger',
+                    "В базе есть карты, использующие тип \"{$type->getName()}\". Удаление невозможно."
+                );
+            }
         }
 
         return $this->redirectToRoute('type_index');

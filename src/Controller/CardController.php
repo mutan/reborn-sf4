@@ -19,6 +19,9 @@ class CardController extends BaseController
 {
     /**
      * @Route("/", name="card_index", methods={"GET"})
+     * @param CardRepository $cardRepository
+     * @param CardService $cardService
+     * @return Response
      */
     public function index(CardRepository $cardRepository, CardService $cardService): Response
     {
@@ -60,6 +63,9 @@ class CardController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="card_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Card $card
+     * @return JsonResponse
      */
     public function edit(Request $request, Card $card): JsonResponse
     {
@@ -85,6 +91,10 @@ class CardController extends BaseController
 
     /**
      * @Route("/{id}", name="card_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Card $card
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Card $card): Response
     {
