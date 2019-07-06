@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CardRepository")
@@ -164,6 +165,26 @@ class Card
         $this->types = new ArrayCollection();
         $this->subtypes = new ArrayCollection();
         $this->artists = new ArrayCollection();
+    }
+
+    /**
+     * @Assert\Callback
+     * @param ExecutionContextInterface $context
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->artists->isEmpty()) {
+            $context->buildViolation('~multiple_select')->atPath('artists')->addViolation();
+        }
+        if ($this->liquids->isEmpty()) {
+            $context->buildViolation('~multiple_select')->atPath('liquids')->addViolation();
+        }
+        if ($this->elements->isEmpty()) {
+            $context->buildViolation('~multiple_select')->atPath('elements')->addViolation();
+        }
+        if ($this->types->isEmpty()) {
+            $context->buildViolation('~multiple_select')->atPath('types')->addViolation();
+        }
     }
 
     public function getId(): ?int

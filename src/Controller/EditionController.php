@@ -6,6 +6,7 @@ use App\Entity\Edition;
 use App\Form\EditionType;
 use App\Repository\EditionRepository;
 use App\Services\CardService;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,9 @@ class EditionController extends BaseController
 {
     /**
      * @Route("/", name="edition_index", methods={"GET"})
+     * @param EditionRepository $editionRepository
+     * @param CardService $cardService
+     * @return Response
      */
     public function index(EditionRepository $editionRepository, CardService $cardService): Response
     {
@@ -60,6 +64,9 @@ class EditionController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="edition_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Edition $edition
+     * @return JsonResponse
      */
     public function edit(Request $request, Edition $edition): JsonResponse
     {
@@ -85,14 +92,22 @@ class EditionController extends BaseController
 
     /**
      * @Route("/{id}", name="edition_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Edition $edition
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Edition $edition): Response
     {
         if ($this->isCsrfTokenValid('delete' . $edition->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($edition);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_EDITION_COUNT);
-            $this->addFlash('success','Выпуск удален');
+            try {
+                $this->getEm()->remove($edition);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_EDITION_COUNT);
+                $this->addFlash('success','Выпуск удален');
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('danger',"В базе есть карты, использующие выпуск \"{$edition->getName()}\". Удаление невозможно.");
+            }
         }
 
         return $this->redirectToRoute('edition_index');

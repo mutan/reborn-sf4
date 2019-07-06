@@ -1,5 +1,6 @@
 # entity constraints
 ~not_blank: Это поле не должно быть пустым.
+~multiple_select: Выберите хотя бы одно значение.
 ~regexp:
   number: В этом поле могут быть только цифры.
   number.power: Значение {{ value }} недопустимо.

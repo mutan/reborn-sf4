@@ -6,6 +6,7 @@ use App\Entity\Rarity;
 use App\Form\RarityType;
 use App\Repository\RarityRepository;
 use App\Services\CardService;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,9 @@ class RarityController extends BaseController
 {
     /**
      * @Route("/", name="rarity_index", methods={"GET"})
+     * @param RarityRepository $rarityRepository
+     * @param CardService $cardService
+     * @return Response
      */
     public function index(RarityRepository $rarityRepository, CardService $cardService): Response
     {
@@ -60,6 +64,9 @@ class RarityController extends BaseController
 
     /**
      * @Route("/{id}/edit", name="rarity_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Rarity $rarity
+     * @return JsonResponse
      */
     public function edit(Request $request, Rarity $rarity): JsonResponse
     {
@@ -85,14 +92,22 @@ class RarityController extends BaseController
 
     /**
      * @Route("/{id}", name="rarity_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Rarity $rarity
+     * @return Response
+     * @throws InvalidArgumentException
      */
     public function delete(Request $request, Rarity $rarity): Response
     {
         if ($this->isCsrfTokenValid('delete' . $rarity->getId(), $request->request->get('_token'))) {
-            $this->getEm()->remove($rarity);
-            $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
-            $this->addFlash('success','Стихия удалена');
+            try {
+                $this->getEm()->remove($rarity);
+                $this->getEm()->flush();
+                $this->getCache()->deleteItem(CardService::CACHE_KEY_RARITY_COUNT);
+                $this->addFlash('success','Стихия удалена');
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('danger',"В базе есть карты, использующие редкость \"{$rarity->getName()}\". Удаление невозможно.");
+            }
         }
 
         return $this->redirectToRoute('rarity_index');
