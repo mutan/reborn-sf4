@@ -8,10 +8,10 @@
 </div>
 
 {{ form_start(form, {'attr': {'id': 'card-new-form'}}) }}
-    {{ form_widget(form._token) }}
-    {{ form_errors(form) }}
 <!--Body-->
 <div class="modal-body">
+    {{ form_widget(form._token) }}
+    {{ form_errors(form) }}
     <div class="form-row">
         <div class="form-group col-sm-12 col-md-4">
             {{ form_label(form.name, 'Название') }}

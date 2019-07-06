@@ -52,21 +52,21 @@ class Card
     /**
      * NULL, 0+ (0+ у существ, NULL у остальных)
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     * @Assert\Regex(pattern="/^\d+$/", message="~regexp.number.power")
      */
     private $power_weak;
 
     /**
      * NULL, 0+ (0+ у существ, NULL у остальных)
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number.power")
      */
     private $power_medium;
 
     /**
      * NULL, 0+ (0+ у существ, NULL у остальных)
      * @ORM\Column(type="integer", nullable=true)
-     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number.power")
      */
     private $power_strong;
 
@@ -171,7 +171,7 @@ class Card
         return $this->id;
     }
 
-    public function getCost(): ?int
+    public function getCost()
     {
         return $this->cost;
     }
@@ -259,7 +259,7 @@ class Card
         return $this;
     }
 
-    public function getLives(): ?int
+    public function getLives()
     {
         return $this->lives;
     }
@@ -283,7 +283,7 @@ class Card
         return $this;
     }
 
-    public function getMovement(): ?int
+    public function getMovement()
     {
         return $this->movement;
     }
@@ -307,7 +307,7 @@ class Card
         return $this;
     }
 
-    public function getPowerWeak(): ?int
+    public function getPowerWeak()
     {
         return $this->power_weak;
     }
@@ -319,7 +319,7 @@ class Card
         return $this;
     }
 
-    public function getPowerMedium(): ?int
+    public function getPowerMedium()
     {
         return $this->power_medium;
     }
@@ -331,7 +331,7 @@ class Card
         return $this;
     }
 
-    public function getPowerStrong(): ?int
+    public function getPowerStrong()
     {
         return $this->power_strong;
     }
