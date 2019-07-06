@@ -20,22 +20,71 @@ class Card
     private $id;
 
     /**
+     * 0+
      * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="~not_blank")
+     * @Assert\Regex(pattern="/^\d+$/", message="~regexp.number")
+     */
+    private $number;
+
+    /**
+     * 0+
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="~not_blank")
+     * @Assert\Regex(pattern="/^\d+$/", message="~regexp.number")
      */
     private $cost;
 
     /**
+     * NULL, 0+
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     */
+    private $lives;
+
+    /**
+     * NULL, 0+ (0 у артефактов, 1+ у существ, NULL у летающих)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     */
+    private $movement;
+
+    /**
+     * NULL, 0+ (0+ у существ, NULL у остальных)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     */
+    private $power_weak;
+
+    /**
+     * NULL, 0+ (0+ у существ, NULL у остальных)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     */
+    private $power_medium;
+
+    /**
+     * NULL, 0+ (0+ у существ, NULL у остальных)
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Regex(pattern="/^\d*$/", message="~regexp.number")
+     */
+    private $power_strong;
+
+    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Liquid", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $liquids;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $name;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Element", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $elements;
 
@@ -45,55 +94,32 @@ class Card
     private $image;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $lives;
-
-    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $flying;
 
     /**
-     * 0 у артефактов, 1+ у существ, NULL у летающих
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $movement;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Rarity", inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $rarity;
 
-    /**
-     * 0+ у существ, NULL у остальных
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $power_weak;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $power_medium;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $power_strong;
-
-    /**
+     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Supertype", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $supertypes;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Type", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $types;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Subtype", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $subtypes;
 
@@ -108,18 +134,15 @@ class Card
     private $flavor;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $number;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Artist", inversedBy="cards")
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $artists;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Edition", inversedBy="cards")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="~not_blank")
      */
     private $edition;
 
@@ -153,7 +176,7 @@ class Card
         return $this->cost;
     }
 
-    public function setCost(int $cost): self
+    public function setCost($cost): self
     {
         $this->cost = $cost;
 
@@ -241,7 +264,7 @@ class Card
         return $this->lives;
     }
 
-    public function setLives(int $lives): self
+    public function setLives($lives): self
     {
         $this->lives = $lives;
 
@@ -265,7 +288,7 @@ class Card
         return $this->movement;
     }
 
-    public function setMovement(?int $movement): self
+    public function setMovement($movement): self
     {
         $this->movement = $movement;
 
@@ -289,7 +312,7 @@ class Card
         return $this->power_weak;
     }
 
-    public function setPowerWeak(?int $power_weak): self
+    public function setPowerWeak($power_weak): self
     {
         $this->power_weak = $power_weak;
 
@@ -301,7 +324,7 @@ class Card
         return $this->power_medium;
     }
 
-    public function setPowerMedium(?int $power_medium): self
+    public function setPowerMedium($power_medium): self
     {
         $this->power_medium = $power_medium;
 
@@ -313,7 +336,7 @@ class Card
         return $this->power_strong;
     }
 
-    public function setPowerStrong(?int $power_strong): self
+    public function setPowerStrong($power_strong): self
     {
         $this->power_strong = $power_strong;
 
@@ -427,7 +450,7 @@ class Card
         return $this->number;
     }
 
-    public function setNumber(int $number): self
+    public function setNumber($number): self
     {
         $this->number = $number;
 
