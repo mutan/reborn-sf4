@@ -2,20 +2,9 @@
 
 {% block title %}Художники{% endblock %}
 
-{% block header %}
-    <div class="col-md-10 d-flex align-items-center justify-content-start">
-        <h1><i class="fas fa-cogs"></i> Художники <small class="d-none d-lg-inline text-secondary"></small></h1>
-    </div>
-    <div class="col-md-2 d-flex align-items-center justify-content-end">
-        <div class="dropdown create">
-            <button id="type_new" class="btn btn-outline-light" type="button">
-                <i class="fas fa-plus"></i> Добавить
-            </button>
-        </div>
-    </div>
-{% endblock %}
-
 {% block body %}
+    {{ include('admin/layout/_header_block.html.twig', {'title': 'Типы', 'id': 'type_new'}) }}
+
     <table class="table table-hover datatable">
         <thead>
             <tr>

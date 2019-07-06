@@ -2,23 +2,8 @@
 
 {% block title %}Карты{% endblock %}
 
-{% block header %}
-
-{% endblock %}
-
 {% block body %}
-    <div class="row mb-4">
-        <div class="col-md-10 d-flex align-items-center justify-content-start">
-            <h1>Карты</h1>
-        </div>
-        <div class="col-md-2 d-flex align-items-center justify-content-end">
-            <div class="dropdown create">
-                <button id="card_new" class="btn btn-sm btn-default" type="button">
-                    <i class="fas fa-plus"></i> Добавить
-                </button>
-            </div>
-        </div>
-    </div>
+    {{ include('admin/layout/_header_block.html.twig', {'title': 'Карты', 'id': 'card_new'}) }}
 
     <table class="table table-hover table-responsive datatable">
         <thead>
@@ -33,7 +18,7 @@
         <tbody>
         {% for card in cards %}
             <tr>
-                <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid img-image-popover" alt="img" data-toggle="image-popover" data-content="<img src='{{ asset(cardService.imageDir ~ card.image) }}' class='img-fluid'>"></td>
+                <td width="2%"><img src="{{ asset(cardService.imageDir ~ card.image) }}" class="img-fluid img-image-popover" data-toggle="image-popover" data-content="<img src='{{ asset(cardService.imageDir ~ card.image) }}' class='img-fluid'>"></td>
                 <td>{{ card.number }}</td>
                 <td>{{ card.name }}</td>
                 <td><img src="{{ asset(cardService.iconDir ~ card.rarity.image) }}" class="img-fluid" alt=""></td>

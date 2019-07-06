@@ -75,8 +75,14 @@ let Modal = {
         $.ajax({
             url: options.url,
             type: 'POST',
-            beforeSend: ()=> {Modal.toggleButtonSpinnerIcon(e);},
-            complete: ()=> {Modal.toggleButtonSpinnerIcon(e);}
+            beforeSend: ()=> {
+                Modal.toggleButtonSpinnerIcon(e);
+                $(e.currentTarget).addClass('disabled');
+            },
+            complete: ()=> {
+                Modal.toggleButtonSpinnerIcon(e);
+                $(e.currentTarget).removeClass('disabled');
+            }
         }).then(function (response) {
             Modal.reload(Modal.getModal(), response, options);
         });

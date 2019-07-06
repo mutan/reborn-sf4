@@ -45,7 +45,7 @@
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <img src="{{ asset('build/icons/flying.png') }}" class="img-fluid pr-2" alt="Летающий"> <input type="checkbox" id="card_flying" name="card[flying]" value="{{ form.vars.value.flying }}" {% if form.vars.value.flying %} checked="checked"{% endif %} required="required">
+                        <img src="{{ asset('icons/flying.png') }}" class="img-fluid pr-2" alt="Летающий"> <input type="checkbox" id="card_flying" name="card[flying]" value="{{ form.vars.value.flying }}" {% if form.vars.value.flying %} checked="checked"{% endif %} required="required">
                     </div>
                 </div>
                 <input type="text" class="form-control" id="card_movement" name="card[movement]" value="{{ form.vars.value.movement }}" required="required">

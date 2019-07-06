@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Reborn Админка</a>
+            <a class="navbar-brand" href="{{ path('admin') }}"><i class="fas fa-tools mr-2"></i>Reborn • Админка</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsCollapse" aria-controls="navbarsCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,6 +47,7 @@
         </div>
     </nav>
 
+
     <header id="header">
         <div class="container">
             <div class="row">
@@ -54,6 +55,7 @@
             </div>
         </div>
     </header>
+
 
     <!-- Flash messages -->
     {% for label, messages in app.flashes %}
