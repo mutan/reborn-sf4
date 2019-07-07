@@ -56,12 +56,21 @@
         </div>
     </header>
 
-
     <!-- Flash messages -->
     {% for label, messages in app.flashes %}
     <div class="container">
         {% for message in messages %}
             <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {% if label == 'success' %}
+                    <h4 class="alert-heading">Успешно</h4>
+                    <hr>
+                {% elseif label == 'warning' %}
+                    <h4 class="alert-heading">Предупреждение</h4>
+                    <hr>
+                {% elseif label == 'danger' %}
+                    <h4 class="alert-heading">Ошибка</h4>
+                    <hr>
+                {% endif %}
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert">
                     <span aria-hidden="true">&times;</span>

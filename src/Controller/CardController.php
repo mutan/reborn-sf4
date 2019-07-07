@@ -98,6 +98,7 @@ class CardController extends BaseController
      */
     public function delete(Request $request, Card $card): Response
     {
+        //TODO Запретить удалять карту, если она используется хотя бы в одной колоде
         if ($this->isCsrfTokenValid('delete' . $card->getId(), $request->request->get('_token'))) {
             $this->getEm()->remove($card);
             $this->getEm()->flush();

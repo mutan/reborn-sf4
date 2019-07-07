@@ -106,7 +106,7 @@ class RarityController extends BaseController
                 $this->getCache()->deleteItem(CardService::CACHE_KEY_RARITY_COUNT);
                 $this->addFlash('success','Стихия удалена');
             } catch (ForeignKeyConstraintViolationException $e) {
-                $this->addFlash('danger',"В базе есть карты, использующие редкость \"{$rarity->getName()}\". Удаление невозможно.");
+                $this->addFlash('warning',"В базе есть карты, использующие редкость \"{$rarity->getName()}\". Удаление невозможно.");
             }
         }
 

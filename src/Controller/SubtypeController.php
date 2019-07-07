@@ -105,7 +105,7 @@ class SubtypeController extends BaseController
                 $this->addFlash('success','Подтип удален');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие подтип \"{$subtype->getName()}\". Удаление невозможно."
                 );
             }

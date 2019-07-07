@@ -107,7 +107,7 @@ class LiquidController extends BaseController
                 $this->addFlash('success','Стихия удалена');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие жидкость \"{$liquid->getName()}\". Удаление невозможно."
                 );
             }

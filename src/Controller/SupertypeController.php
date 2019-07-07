@@ -105,7 +105,7 @@ class SupertypeController extends BaseController
                 $this->addFlash('success','Супертип удален');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие супертип \"{$supertype->getName()}\". Удаление невозможно."
                 );
             }

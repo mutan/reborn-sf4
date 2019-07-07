@@ -106,7 +106,7 @@ class EditionController extends BaseController
                 $this->getCache()->deleteItem(CardService::CACHE_KEY_EDITION_COUNT);
                 $this->addFlash('success','Выпуск удален');
             } catch (ForeignKeyConstraintViolationException $e) {
-                $this->addFlash('danger',"В базе есть карты, использующие выпуск \"{$edition->getName()}\". Удаление невозможно.");
+                $this->addFlash('warning',"В базе есть карты, использующие выпуск \"{$edition->getName()}\". Удаление невозможно.");
             }
         }
 

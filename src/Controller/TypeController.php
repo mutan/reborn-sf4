@@ -105,7 +105,7 @@ class TypeController extends BaseController
                 $this->addFlash('success','Тип удален');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие тип \"{$type->getName()}\". Удаление невозможно."
                 );
             }

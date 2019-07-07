@@ -105,7 +105,7 @@ class ArtistController extends BaseController
                 $this->addFlash('success','Художник удален');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие художника \"{$artist->getName()}\". Удаление невозможно."
                 );
             }

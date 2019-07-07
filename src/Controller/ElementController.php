@@ -107,7 +107,7 @@ class ElementController extends BaseController
                 $this->addFlash('success','Стихия удалена');
             } catch (EmptyManyToManyRelationException $e) {
                 $this->addFlash(
-                    'danger',
+                    'warning',
                     "В базе есть карты, использующие стихия \"{$element->getName()}\". Удаление невозможно."
                 );
             }
