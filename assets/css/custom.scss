@@ -10,7 +10,8 @@ html, body {
   border-radius: 0;
 }
 
-/* Navbar */
+/* NAVBAR */
+
 .navbar {
   padding-top: 0;
   padding-bottom: 0;
@@ -28,7 +29,8 @@ html, body {
   border-radius: 0;
 }
 
-/* Header */
+/* HEADER */
+
 #header {
   margin-bottom: 1rem;
   background: #333333;
@@ -43,9 +45,7 @@ html, body {
 
 }
 
-.breadcrumb {
-  border-radius: 0;
-}
+/* LIST GROUP (MENU) */
 
 .list-group-item {
   padding: 6px 1rem;
@@ -58,8 +58,8 @@ html, body {
   border-color: $bgDefault;
 }
 
+/* BOOTSTRAP popover */
 
-/* Bootstrap popover */
 .popover {
   max-width: 300px;
   border: 0;
