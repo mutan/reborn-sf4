@@ -14,6 +14,181 @@ require('datatables.net-bs4/js/dataTables.bootstrap4');
 
 
 
+
+
+
+// GLOBAL CONSTANTS
+// -----------------------------------
+
+(function(window, document, $, undefined){
+
+    window.APP_COLORS = {
+        'primary':                '#5d9cec',
+        'success':                '#27c24c',
+        'info':                   '#23b7e5',
+        'warning':                '#ff902b',
+        'danger':                 '#f05050',
+        'inverse':                '#131e26',
+        'green':                  '#37bc9b',
+        'pink':                   '#f532e5',
+        'purple':                 '#7266ba',
+        'dark':                   '#3a3f51',
+        'yellow':                 '#fad732',
+        'gray-darker':            '#232735',
+        'gray-dark':              '#3a3f51',
+        'gray':                   '#dde6e9',
+        'gray-light':             '#e4eaec',
+        'gray-lighter':           '#edf1f2'
+    };
+
+    window.APP_MEDIAQUERY = {
+        'desktopLG':             1200,
+        'desktop':                992,
+        'tablet':                 768,
+        'mobile':                 480
+    };
+
+})(window, document, window.jQuery);
+
+// SIDEBAR
+// -----------------------------------
+(function(window, document, $, undefined) {
+
+    var $win;
+    var $html;
+    var $body;
+    var $sidebar;
+    var mq;
+
+    $(function() {
+
+        $win = $(window);
+        $html = $('html');
+        $body = $('body');
+        $sidebar = $('.sidebar');
+        mq = APP_MEDIAQUERY;
+
+
+
+
+
+        var sidebarAnyclickClose = $sidebar.data('sidebarAnyclickClose');
+
+        // Allows to close
+        if (typeof sidebarAnyclickClose !== 'undefined') {
+
+            $('.wrapper').on('click.sidebar', function(e) {
+                // don't check if sidebar not visible
+                if (!$body.hasClass('aside-toggled')) return;
+
+                var $target = $(e.target);
+                if (!$target.parents('.aside-container').length && // if not child of sidebar
+                    !$target.is('#user-block-toggle') && // user block toggle anchor
+                    !$target.parent().is('#user-block-toggle') // user block toggle icon
+                ) {
+                    $body.removeClass('aside-toggled');
+                }
+
+            });
+        }
+
+    });
+
+    function sidebarAddBackdrop() {
+        var $backdrop = $('<div/>', { 'class': 'dropdown-backdrop' });
+        $backdrop.insertAfter('.aside-container').on("click mouseenter", function() {
+            removeFloatingNav();
+        });
+    }
+
+    // Open the collapse sidebar submenu items when on touch devices
+    // - desktop only opens on hover
+    function toggleTouchItem($element) {
+        $element
+            .siblings('li')
+            .removeClass('open')
+            .end()
+            .toggleClass('open');
+    }
+
+    // Handles hover to open items under collapsed menu
+    // -----------------------------------
+    function toggleMenuItem($listItem) {
+
+        removeFloatingNav();
+
+        var ul = $listItem.children('ul');
+
+        if (!ul.length) return $();
+        if ($listItem.hasClass('open')) {
+            toggleTouchItem($listItem);
+            return $();
+        }
+
+        var $aside = $('.aside-container');
+        var $asideInner = $('.aside-inner'); // for top offset calculation
+        // float aside uses extra padding on aside
+        var mar = parseInt($asideInner.css('padding-top'), 0) + parseInt($aside.css('padding-top'), 0);
+
+        var subNav = ul.clone().appendTo($aside);
+
+        toggleTouchItem($listItem);
+
+        var itemTop = ($listItem.position().top + mar) - $sidebar.scrollTop();
+        var vwHeight = $win.height();
+
+        subNav
+            .addClass('nav-floating')
+            .css({
+                position: isFixed() ? 'fixed' : 'absolute',
+                top: itemTop,
+                bottom: (subNav.outerHeight(true) + itemTop > vwHeight) ? 0 : 'auto'
+            });
+
+        subNav.on('mouseleave', function() {
+            toggleTouchItem($listItem);
+            subNav.remove();
+        });
+
+        return subNav;
+    }
+
+    function removeFloatingNav() {
+        $('.sidebar-subnav.nav-floating').remove();
+        $('.dropdown-backdrop').remove();
+        $('.sidebar li.open').removeClass('open');
+    }
+
+    function isTouch() {
+        return $html.hasClass('touch');
+    }
+
+    function isSidebarCollapsed() {
+        return $body.hasClass('aside-collapsed') || $body.hasClass('aside-collapsed-text');
+    }
+
+    function isSidebarToggled() {
+        return $body.hasClass('aside-toggled');
+    }
+
+    function isMobile() {
+        return $win.width() < mq.tablet;
+    }
+
+    function isFixed() {
+        return $body.hasClass('layout-fixed');
+    }
+
+    function useAsideHover() {
+        return $body.hasClass('aside-hover');
+    }
+
+})(window, document, window.jQuery);
+
+
+
+
+
 // TOGGLE SIDEBAR STATE
 // -----------------------------------
 (function(window, document, $, undefined) {
