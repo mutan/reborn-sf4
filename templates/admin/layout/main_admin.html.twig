@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Admin Template</title>
+    <title>Админка | {% block title %}{% endblock %}</title>
+    <link rel="icon" href="{{ asset('build/favicon.ico') }}">
     {% block stylesheets %}
         {{ encore_entry_link_tags('admin') }}
     {% endblock %}
@@ -35,7 +36,7 @@
 
                 <ul class="navbar-nav flex-row">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">User</a>
+                        <a class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Выйти</a>
                     </li>
                 </ul>
             </nav>
@@ -43,8 +44,37 @@
 
         <aside class="aside-container">
             <div class="aside-inner">
-                <nav class="sidebar" data-sidebar-anyclick-close="">
+                <nav class="sidebar">
                     <ul class="sidebar-nav">
+
+                        <li class="nav-heading">Карты</li>
+                        {% for item in menu_service.cardmenu %}
+                            {% if not item.submenus %}
+                                <li class="{{ (app.request.attributes.get('_route') == item.route) ? 'active' : '' }}">
+                                    <a href="{{ path(item.route) }}" title="{{ item.label }}">
+                                        <span class="float-right badge badge-info">{{ item.badge }}</span>
+                                        {% if item.icon %}<i class="{{ item.icon }}"></i>&nbsp;{% endif %} {{ item.label }}
+                                    </a>
+                                </li>
+                            {% else %}
+                                <li class="">
+                                    <a href="#{{ item.id }}" title="{{ item.label }}" data-toggle="collapse" class="collapsed">
+                                        {% if item.icon %}<i class="{{ item.icon }}"></i>&nbsp;{% endif %} {{ item.label }} <i class="fas fa-caret-down"></i>
+                                    </a>
+                                    <ul class="sidebar-nav sidebar-subnav collapse" id="{{ item.id }}">
+                                        {% for submenu in item.submenus %}
+                                            <li class="{{ (app.request.attributes.get('_route') == submenu.route) ? 'active' : '' }}">
+                                                <a href="{{ path(submenu.route) }}" title="{{ submenu.label }}">
+                                                    <span class="float-right badge badge-info">{{ submenu.badge }}</span>
+                                                    {% if submenu.icon %}<i class="{{ submenu.icon }}"></i>&nbsp;{% endif %} {{ submenu.label }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+
                         <li class="nav-heading">Menu Navigation</li>
                         <li class="active">
                             <a href="#" title="Single View">
@@ -52,11 +82,11 @@
                                 <i class="far fa-file pr-3"></i> Single View
                             </a>
                         </li>
-                        <li class=" ">
+                        <li class="">
                             <a href="#forms" title="Forms" data-toggle="collapse" class="collapsed" aria-expanded="false">
                                 <i class="far fa-edit pr-3"></i>Forms
                             </a>
-                            <ul class="sidebar-nav sidebar-subnav collapse" id="forms"1>
+                            <ul class="sidebar-nav sidebar-subnav collapse" id="forms">
                                 <li class="sidebar-subnav-header">Forms</li>
                                 <li class=" ">
                                     <a href="#" title="Standard">Standard</a>
@@ -67,8 +97,6 @@
                             </ul>
                         </li>
 
-
-
                     </ul>
                 </nav>
             </div>
@@ -76,6 +104,32 @@
 
         <section class="section-container">
             <div class="content-wrapper">
+
+                <!-- Flash messages -->
+                {% for label, messages in app.flashes %}
+                    <div class="container">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                                {% if label == 'success' %}
+                                    <h4 class="alert-heading">Успешно</h4>
+                                    <hr>
+                                {% elseif label == 'warning' %}
+                                    <h4 class="alert-heading">Предупреждение</h4>
+                                    <hr>
+                                {% elseif label == 'danger' %}
+                                    <h4 class="alert-heading">Ошибка</h4>
+                                    <hr>
+                                {% endif %}
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <!-- /Flash messages -->
+
                 <div class="content-heading">
                     <div>Single View редактирование</div>
                     <div class="ml-auto">
@@ -95,6 +149,16 @@
             <span>&copy; 2018 - Angle</span>
         </footer>
     </div>
+
+    <!-- Modal: modalMain -->
+    <div class="modal fade" id="mainModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+    <!-- Modal: modalMain -->
 
     {% block javascripts %}
         {{ encore_entry_script_tags('admin') }}
