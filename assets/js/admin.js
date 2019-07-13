@@ -10,14 +10,6 @@ require('datatables.net-bs4/js/dataTables.bootstrap4');
 
 
 
-
-
-
-
-
-
-
-
 // SIDEBAR – закрываем при клике на на нем
 // -----------------------------------
 (function(window, document, $, undefined) {

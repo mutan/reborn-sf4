@@ -6,7 +6,6 @@
 
 
 
-
 /* ========================================================================
    Custom styles
  ========================================================================== */
@@ -40,6 +39,7 @@ body {
   min-height: 100%;
   overflow-x: hidden;
 }
+
 .wrapper .aside-container {
   position: absolute;
   width: 220px;
@@ -50,12 +50,14 @@ body {
   backface-visibility: hidden;
   background-color: #3a3f51;
 }
+
 .wrapper .aside-container .aside-inner {
   padding-top: 55px;
   height: 100%;
   width: 220px;
   overflow: hidden;
 }
+
 .wrapper .section-container {
   position: relative;
   height: 100%;
@@ -64,6 +66,7 @@ body {
   background-color: #f5f7fa;
   margin-bottom: 60px !important;
 }
+
 .wrapper .footer-container {
   position: absolute;
   left: 0;
@@ -75,6 +78,7 @@ body {
   z-index: 109;
   font-size: .875rem;
 }
+
 .wrapper .footer-container p {
   margin: 0;
 }
@@ -105,6 +109,7 @@ body {
   font-size: 12px;
   color: #909FA7;
 }
+
 .content-wrapper .container,
 .content-wrapper .container-fluid {
   padding-left: 0;
@@ -719,8 +724,7 @@ body {
 .sidebar-subnav > li > .nav-item {
   display: block;
   position: relative;
-  padding: 10px 20px;
-  padding-left: 53px;
+  padding: 10px 20px 10px 55px;
   font-weight: normal;
   background-color: transparent !important;
   color: #e1e2e3;
@@ -749,21 +753,6 @@ body {
 
 
 
-
-
-
-
-/* ========================================================================
-   Component: layout
- ========================================================================== */
-body, .wrapper .section-container {
-  background-color: #f5f7fa;
-}
-
-
-/* ========================================================================
-   Component: top-navbar
- ========================================================================== */
 
 
 
