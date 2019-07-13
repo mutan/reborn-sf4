@@ -29,9 +29,6 @@ html, body {
   overflow-x: hidden;
 }
 
-.wrapper.ng-leave {
-  display: none;
-}
 
 .wrapper .aside-container {
   position: absolute;
@@ -51,17 +48,7 @@ html, body {
   overflow: hidden;
 }
 
-.wrapper .aside-container .nav-floating {
-  left: inherit;
-  margin-left: 220px;
-  z-index: 1110;
-  min-width: 190px;
-  overflow: auto;
-}
 
-.wrapper .dropdown-backdrop {
-  z-index: 109;
-}
 
 .wrapper .section-container {
   position: relative;
@@ -88,9 +75,6 @@ html, body {
   margin: 0;
 }
 
-.modal-open .wrapper {
-  z-index: 0;
-}
 
 .content-wrapper {
   padding: 15px;
@@ -974,7 +958,7 @@ _:-ms-lang(x),
 .sidebar {
   height: 100%;
   padding-bottom: 20px;
-  background-color: #fff;
+  background-color: #3a3f51;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 }
