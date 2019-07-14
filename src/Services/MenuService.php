@@ -11,6 +11,7 @@ class MenuService
         $this->cardService = $cardService;
     }
 
+    // DEL
     public function getMenu()
     {
         return [

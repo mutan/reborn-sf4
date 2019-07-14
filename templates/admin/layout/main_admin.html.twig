@@ -107,46 +107,23 @@
 
                 <!-- Flash messages -->
                 {% for label, messages in app.flashes %}
-                    <div class="container">
-                        {% for message in messages %}
-                            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
-                                {% if label == 'success' %}
-                                    <h4 class="alert-heading">Успешно</h4>
-                                    <hr>
-                                {% elseif label == 'warning' %}
-                                    <h4 class="alert-heading">Предупреждение</h4>
-                                    <hr>
-                                {% elseif label == 'danger' %}
-                                    <h4 class="alert-heading">Ошибка</h4>
-                                    <hr>
-                                {% endif %}
-                                {{ message }}
-                                <button type="button" class="close" data-dismiss="alert">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
                 {% endfor %}
                 <!-- /Flash messages -->
 
-                <div class="content-heading">
-                    <div>Single View редактирование</div>
-                    <div class="ml-auto">
-                        <button class="btn btn-sm  btn-secondary" type="button">English</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <h2 class="text-thin">Single view content</h2>
-                        <p>This project is an application skeleton. You can use it to quickly bootstrap your jQuery webapp projects and dev environment for these projects.<br>The seed app doesn't do much and has most of the feature removed so you can add theme as per your needs just following the demo app examples.</p>
-                    </div>
-                </div>
+                {% block body %}{% endblock %}
             </div>
         </section>
 
         <footer class="footer-container">
-            <span>&copy; 2018 - Angle</span>
+            <span>&copy; {{ app_site_name }}</span>
         </footer>
     </div>
 
