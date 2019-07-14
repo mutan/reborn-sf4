@@ -5,4 +5,5 @@ twig:
     form_themes:
         - 'bootstrap_4_layout.html.twig'
     globals:
+        app_site_name: '%app_site_name%'
         menu_service: '@App\Services\MenuService'
