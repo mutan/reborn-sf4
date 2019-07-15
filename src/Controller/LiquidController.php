@@ -47,7 +47,7 @@ class LiquidController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->persist($liquid);
             $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_LIQUID_COUNT);
             $this->addFlash('success', "Стихия добавлена");
             $reload = true;
         }

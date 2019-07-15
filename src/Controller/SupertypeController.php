@@ -45,7 +45,7 @@ class SupertypeController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->persist($supertype);
             $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_SUPERTYPE_COUNT);
             $this->addFlash('success', "Супертип добавлен");
             $reload = true;
         }

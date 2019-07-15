@@ -47,7 +47,7 @@ class RarityController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->persist($rarity);
             $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ELEMENT_COUNT);
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_RARITY_COUNT);
             $this->addFlash('success', "Стихия добавлена");
             $reload = true;
         }

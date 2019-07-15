@@ -1,31 +1,43 @@
-{% extends 'admin/layout/base_admin.html.twig' %}
+{% extends 'admin/layout/main_admin.html.twig' %}
 
-{% block title %}Художники{% endblock %}
+{% block title %}Супертипы{% endblock %}
 
 {% block body %}
-    {{ include('admin/layout/_header_block.html.twig', {'title': 'Супертипы', 'id': 'supertype_new'}) }}
+    <div class="content-heading">
+        <div>Супертипы</div>
+        <div class="ml-auto">
+            <button id="supertype_new" class="btn btn-sm btn-purple" type="button">
+                <i class="fas fa-plus"></i> Добавить
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
 
-    <table class="table table-hover datatable">
-        <thead>
-            <tr>
-                <th>Название</th>
-                <th width="1%">Действия</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for supertype in supertypes %}
-            <tr>
-                <td>{{ supertype.name }}</td>
-                <td>
-                    {{ include('admin/layout/_edit_button.html.twig', {'route': 'supertype_edit', 'id': supertype.id}) }}
-                    {{ include('admin/layout/_delete_button.html.twig', {'route': 'supertype_delete', 'id': supertype.id}) }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Записей не найдено.</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-hover datatable">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th width="1%">Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for supertype in supertypes %}
+                    <tr>
+                        <td>{{ supertype.name }}</td>
+                        <td>
+                            {{ include('admin/layout/_edit_button.html.twig', {'route': 'supertype_edit', 'id': supertype.id}) }}
+                            {{ include('admin/layout/_delete_button.html.twig', {'route': 'supertype_delete', 'id': supertype.id}) }}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Записей не найдено.</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
 {% endblock %}

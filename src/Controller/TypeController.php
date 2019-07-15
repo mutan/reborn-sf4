@@ -45,7 +45,7 @@ class TypeController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEm()->persist($type);
             $this->getEm()->flush();
-            $this->getCache()->deleteItem(CardService::CACHE_KEY_ARTIST_COUNT);
+            $this->getCache()->deleteItem(CardService::CACHE_KEY_TYPE_COUNT);
             $this->addFlash('success', "Тип добавлен");
             $reload = true;
         }
