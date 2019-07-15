@@ -5,7 +5,7 @@
 require('../css/admin.scss');
 
 require('./modernizr.custom');
-const Storages = require('js-storage/js.storage');
+const store = require('store');
 const $ = require('jquery');
 
 require('popper.js/dist/popper');
@@ -26,6 +26,34 @@ require('tinymce/plugins/lists');
 /* =============================================================================
    Custom styles
 ============================================================================= */
+
+/* Сохраняем состояние меню "card_parts" в localStorage */
+$(document).ready(function () {
+    let $cardPartsUl = $('#card_parts');
+    let $cardPartsA = $cardPartsUl.prev('a');
+
+    $cardPartsA.on('click', () => {
+        store.get('card_menu_collapsed')
+            ? store.set('card_menu_collapsed', 0)
+            : store.set('card_menu_collapsed', 1)
+    });
+
+    if (store.get('card_menu_collapsed')) { // меню должно быть свернуто
+        if (!$cardPartsA.hasClass('collapsed')) {
+            $cardPartsA.addClass('collapsed');
+        }
+        if ($cardPartsUl.hasClass('show')) {
+            $cardPartsUl.removeClass('show');
+        }
+    } else { // меню должно быть развернуто
+        if ($cardPartsA.hasClass('collapsed')) {
+            $cardPartsA.removeClass('collapsed');
+        }
+        if (!$cardPartsUl.hasClass('show')) {
+            $cardPartsUl.addClass('show');
+        }
+    }
+});
 
 /* Bootstrap Tooltips Initialization */
 $(function () {
@@ -399,6 +427,7 @@ const datatable_config = {
             // Add a state to the browser storage to be restored later
             addState: function(classname) {
                 let data = $.localStorage.get(storageKeyName);
+                //console.dir($.localStorage);
                 if (!data) {
                     data = classname;
                 } else {
