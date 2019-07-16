@@ -29,29 +29,21 @@ require('tinymce/plugins/lists');
 
 /* Сохраняем состояние меню "card_parts" в localStorage */
 $(document).ready(function () {
-    let $cardPartsUl = $('#card_parts');
-    let $cardPartsA = $cardPartsUl.prev('a');
+    const $cardPartsUl = $('#card_parts');
+    const $cardPartsA = $cardPartsUl.prev('a');
+    const menu_card_key = 'menu_card_collapsed';
 
     $cardPartsA.on('click', () => {
-        store.get('card_menu_collapsed')
-            ? store.set('card_menu_collapsed', 0)
-            : store.set('card_menu_collapsed', 1)
+        // переключаем ключ с true на false и обратно
+        store.set(menu_card_key, !store.get(menu_card_key));
     });
 
-    if (store.get('card_menu_collapsed')) { // меню должно быть свернуто
-        if (!$cardPartsA.hasClass('collapsed')) {
-            $cardPartsA.addClass('collapsed');
-        }
-        if ($cardPartsUl.hasClass('show')) {
-            $cardPartsUl.removeClass('show');
-        }
+    if (store.get(menu_card_key)) { // меню должно быть свернуто
+        $cardPartsA.addClass('collapsed');
+        $cardPartsUl.removeClass('show');
     } else { // меню должно быть развернуто
-        if ($cardPartsA.hasClass('collapsed')) {
-            $cardPartsA.removeClass('collapsed');
-        }
-        if (!$cardPartsUl.hasClass('show')) {
-            $cardPartsUl.addClass('show');
-        }
+        $cardPartsA.removeClass('collapsed');
+        $cardPartsUl.addClass('show');
     }
 });
 
