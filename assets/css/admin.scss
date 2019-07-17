@@ -45,3 +45,27 @@
   background-color: #5d9cec;
   border-color: #5d9cec;
 }
+
+/* BOOTSTRAP popover */
+
+.popover {
+  max-width: 300px;
+  border: 0;
+  background-color: transparent;
+  .arrow {
+    visibility: hidden;
+  }
+}
+.popover-body {
+  padding: 0.2rem;
+}
+.img-image-popover {
+  cursor: pointer;
+}
+.text-image-popover {
+  cursor: pointer;
+  color: #0c73cd;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #0c73cd;
+}

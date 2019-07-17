@@ -27,6 +27,31 @@ require('tinymce/plugins/lists');
    Custom styles
 ============================================================================= */
 
+/* Открытие/закрытие бокового меню */
+(function($) {
+    let $body = $('body');
+
+    $(function () {
+        $('.sidebar-toggle').on('click', (e) => {
+            e.preventDefault();
+            $body.toggleClass('aside-toggled')
+        });
+    });
+
+    $(function() {
+        $('.wrapper').on('click', function(e) {
+            if (!$body.hasClass('aside-toggled') // don't check if sidebar not visible
+                || $(e.target).hasClass('sidebar-toggle') // or button-link to show/hide the sidebar was clicked
+                || $(e.target).hasClass('fa-bars')) {  // or bars icon was clicked
+                return;
+            }
+            if (!$(e.target).parents('.aside-container').length) { // if not child of sidebar
+                $body.removeClass('aside-toggled');
+            }
+        });
+    });
+})(window.jQuery);
+
 /* Сохраняем состояние меню "card_parts" в localStorage */
 $(document).ready(function () {
     const $cardPartsUl = $('#card_parts');
@@ -331,122 +356,3 @@ const datatable_config = {
         }
     }
 };
-
-/* -----------------------------------------------------------------------------
-   Sidebar – закрываем при клике на на нем
------------------------------------------------------------------------------ */
-(function(window, document, $, undefined) {
-
-    let $body;
-    $(function() {
-        $body = $('body');
-        $('.wrapper').on('click.sidebar', function(e) {
-            // don't check if sidebar not visible
-            if (!$body.hasClass('aside-toggled')) {
-                return;
-            }
-            if (!$(e.target).parents('.aside-container').length) { // if not child of sidebar
-                $body.removeClass('aside-toggled');
-            }
-        });
-    });
-
-})(window, document, window.jQuery);
-
-/* -----------------------------------------------------------------------------
-   Toggle sidebar state
------------------------------------------------------------------------------ */
-(function(window, document, $, undefined) {
-
-    $(function() {
-        let $body = $('body');
-        let toggle = new StateToggler();
-
-        $('[data-toggle-state]').on('click', function(e) {
-            // e.preventDefault();
-            e.stopPropagation();
-            let element = $(this),
-                classname = element.data('toggleState'),
-                target = element.data('target'),
-                noPersist = (element.attr('data-no-persist') !== undefined);
-            // Specify a target selector to toggle classname
-            // use body by default
-            let $target = target ? $(target) : $body;
-
-            if (classname) {
-                if ($target.hasClass(classname)) {
-                    $target.removeClass(classname);
-                    if (!noPersist) {
-                        toggle.removeState(classname);
-                    }
-                } else {
-                    $target.addClass(classname);
-                    if (!noPersist) {
-                        toggle.addState(classname);
-                    }
-                }
-            }
-
-            // some elements may need this when toggled class change the content size
-            $(window).resize();
-        });
-    });
-
-    // Handle states to/from localstorage
-    window.StateToggler = function() {
-        let storageKeyName = 'jq-toggleState';
-        // Helper object to check for words in a phrase //
-        let WordChecker = {
-            hasWord: function(phrase, word) {
-                return new RegExp('(^|\\s)' + word + '(\\s|$)').test(phrase);
-            },
-            addWord: function(phrase, word) {
-                if (!this.hasWord(phrase, word)) {
-                    return (phrase + (phrase ? ' ' : '') + word);
-                }
-            },
-            removeWord: function(phrase, word) {
-                if (this.hasWord(phrase, word)) {
-                    return phrase.replace(new RegExp('(^|\\s)*' + word + '(\\s|$)*', 'g'), '');
-                }
-            }
-        };
-
-        // Return service public methods
-        return {
-            // Add a state to the browser storage to be restored later
-            addState: function(classname) {
-                let data = $.localStorage.get(storageKeyName);
-                //console.dir($.localStorage);
-                if (!data) {
-                    data = classname;
-                } else {
-                    data = WordChecker.addWord(data, classname);
-                }
-                $.localStorage.set(storageKeyName, data);
-            },
-
-            // Remove a state from the browser storage
-            removeState: function(classname) {
-                let data = $.localStorage.get(storageKeyName);
-                // nothing to remove
-                if (!data) {
-                    return;
-                }
-                data = WordChecker.removeWord(data, classname);
-                $.localStorage.set(storageKeyName, data);
-            },
-
-            // Load the state string and restore the classlist
-            restoreState: function($elem) {
-                var data = $.localStorage.get(storageKeyName);
-                // nothing to restore
-                if (!data) {
-                    return;
-                }
-                $elem.addClass(data);
-            }
-        };
-    };
-
-})(window, document, window.jQuery);
