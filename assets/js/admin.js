@@ -39,10 +39,8 @@ $(document).ready(function () {
     });
 
     if (store.get(menu_card_key)) { // меню должно быть свернуто
-        $cardPartsA.addClass('collapsed');
         $cardPartsUl.removeClass('show');
     } else { // меню должно быть развернуто
-        $cardPartsA.removeClass('collapsed');
         $cardPartsUl.addClass('show');
     }
 });

@@ -58,7 +58,7 @@
                                 </li>
                             {% else %}
                                 <li class="">
-                                    <a href="#{{ item.id }}" title="{{ item.label }}" data-toggle="collapse" class="collapsed">
+                                    <a href="#{{ item.id }}" title="{{ item.label }}" data-toggle="collapse">
                                         {% if item.icon %}<i class="{{ item.icon }}"></i>&nbsp;{% endif %} {{ item.label }} <i class="fas fa-caret-down"></i>
                                     </a>
                                     <ul class="sidebar-nav sidebar-subnav collapse" id="{{ item.id }}">
