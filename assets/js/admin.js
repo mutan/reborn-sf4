@@ -34,7 +34,7 @@ require('tinymce/plugins/lists');
     $(function () {
         $('.sidebar-toggle').on('click', (e) => {
             e.preventDefault();
-            $body.toggleClass('aside-toggled')
+            $body.toggleClass('aside-toggled');
         });
     });
 
@@ -42,10 +42,10 @@ require('tinymce/plugins/lists');
         $('.wrapper').on('click', function(e) {
             if (!$body.hasClass('aside-toggled') // don't check if sidebar not visible
                 || $(e.target).hasClass('sidebar-toggle') // or button-link to show/hide the sidebar was clicked
-                || $(e.target).hasClass('fa-bars')) {  // or bars icon was clicked
+                || $(e.target).parents('.sidebar-toggle').length > 0) { // or icon was clicked
                 return;
             }
-            if (!$(e.target).parents('.aside-container').length) { // if not child of sidebar
+            if (!$(e.target).parents('.aside-container').length) { // if not child of sidebar was clicked
                 $body.removeClass('aside-toggled');
             }
         });

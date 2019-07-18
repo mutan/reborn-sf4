@@ -133,7 +133,7 @@ body {
   }
 }
 
-@media (max-width: 767.98px) { // исчезает aside-container
+@media (max-width: 991.98px) { // исчезает aside-container
   .wrapper .aside-container {
     margin-left: -220px;
   }
@@ -394,7 +394,7 @@ body {
   }
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.98px) {
   .sidebar-toggle {
     position: absolute !important;
     top: 2px;
@@ -402,7 +402,7 @@ body {
     z-index: 3001;
   }
 
-  .sidebar-toggle > em {
+  .sidebar-toggle > i {
     color: white;
   }
 }
