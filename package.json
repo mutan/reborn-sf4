@@ -9,7 +9,7 @@
         "core-js": "^3.0.0",
         "datatables.net": "^1.10.19",
         "datatables.net-bs4": "^1.10.19",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "js-storage": "^1.0.4",
         "loaders.css": "^0.1.2",
         "node-sass": "^4.12.0",
